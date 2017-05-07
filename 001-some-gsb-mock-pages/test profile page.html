@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+	<title> Group Study Base | Home </title>
+
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+	<style type="text/css">
+		.pofile-dashboard {
+			margin-right: 1px;
+			display: flex;
+			overflow: hidden;
+			/*overflow-x: scroll;*/
+			background-color: hotpink;
+			padding: 4px;
+		}
+		.stat-box {
+			min-width: 45%;
+			height: 300px;
+			background-color: yellow;
+			border: solid gray 1px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="profile-header">
+			<div class="avatar-c">
+				<img src="images/avatar 3.png">
+			</div>
+			<div class="text-c">
+				<h2>Oliver Olympian Master 25</h2>
+				<p>olivercools@cooness.com</p>
+			</div>
+		</div>
+		<div class="pofile-dashboard">
+			<div class="stat-box">
+				<h4 class="stat-figure"> 567 </h4>
+				<h5 class="stat-title"> Lecture Notes </h5>
+			</div>
+			<div class="stat-box">
+				<h4 class="stat-figure"> 33 </h4>
+				<h5 class="stat-title"> Comments </h5>
+			</div>
+			<div class="stat-box">
+				<h4 class="stat-figure"> 85 </h4>
+				<h5 class="stat-title"> Likes </h5>
+			</div>
+		</div>
+		<div class="tabs">
+			<div class="tab highlighted">
+				<h3>Bookmarks</h3>
+			</div>
+			<div class="tab">
+				<h3>Contributions</h3>
+			</div>
+		</div>
+		
+	</div>
+	<footer>
+		<div class="footer-container">
+			<h4 class="this-year"> &#9400; 2017 </h4>
+			<h3 class="company-name"> Group Study Base </h3>
+		</div>
+	</footer>
+
+	<script type="text/javascript">
+		var curYPos, curXPos, curDown;
+		var dragScrollDiv = document.querySelector(".pofile-dashboard");
+
+		dragScrollDiv.addEventListener('mousemove', function(e){ 
+		  if(curDown){
+		    // dragScrollDiv.scrollTo(document.body.scrollLeft + (curXPos - e.pageX), document.body.scrollTop + (curYPos - e.pageY));
+		    dragScrollDiv.scrollLeft += (curXPos - e.pageX)/50;
+		    console.log("the scrolling should start now.");
+		  }
+		});
+
+		dragScrollDiv.addEventListener('mousedown', function(e){ 
+		  curYPos = e.pageY; 
+		  curXPos = e.pageX; 
+		  curDown = true; 
+		});
+
+		dragScrollDiv.addEventListener('mouseup', function(e){ 
+		  curDown = false; 
+		});	
+
+		dragScrollDiv.addEventListener("touchstart", function(event){  
+		    console.log('down fired');
+		    event.target.classList.add('down');
+		}, true);
+		dragScrollDiv.addEventListener("touchend", function(event){  
+		    console.log('touch has stopped');
+		    event.target.classList.add('down');
+		}, true);
+	</script>
+
+</body>
+</html>
