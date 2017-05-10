@@ -1,0 +1,64 @@
+<!-- This code is a copied version from: "https://fiddle.jshell.net/0yyegtv9/" -->
+<!-- after reading this from stackoverflow: "http://stackoverflow.com/questions/18880890/how-do-i-toggle-an-elements-class-in-pure-javascript" -->
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+		<title> Group Study Base | Profile Page </title>
+
+		<link rel="stylesheet" type="text/css" href="styles.css">
+
+		<style type="text/css">
+			.heart {
+				cursor: pointer;
+				height: 50px;
+				width: 50px;
+				background-image:url(  'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+				background-position: left;
+				background-repeat:no-repeat;
+				 background-size:2900%; 
+			}
+
+			.heart:hover {
+				background-position:right;
+			}
+
+			.animating {
+				animation: heart-burst .8s steps(28) 1;
+			}
+
+			@keyframes heart-burst {
+				from {background-position:left;}
+				to { background-position:right;}
+			}		
+		</style>
+	</head>
+	<body>
+		<div class="cotainer">
+			<div class="heart"></div>
+		</div>
+		<footer>
+			<div class="footer-container">
+				<h4 class="this-year"> &#9400; 2017 </h4>
+				<h3 class="company-name"> Group Study Base </h3>
+			</div>
+		</footer>
+
+		<script type="text/javascript">
+			document.querySelector(".heart").addEventListener('click', function(e){
+				e.target.classList.toggle('animating');
+			});
+			// document.querySelector(".heart").addEventListener('touchstart', function(e){
+			// 	e.target.classList.toggle('animating');
+			// });
+
+
+			document.querySelector(".heart").addEventListener('animationend', function(e){
+				e.target.classList.toggle('animating');
+			});
+		</script>
+	</body>
+</html>

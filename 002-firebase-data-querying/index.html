@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+	<title> Group Study Base | Design Home </title>
+		
+	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyA9qbEIGZh8B9dpFCgeDk9kj3gD3kuYXkA",
+	    authDomain: "gideonamaniaudioproject01.firebaseapp.com",
+	    databaseURL: "https://gideonamaniaudioproject01.firebaseio.com",
+	    projectId: "gideonamaniaudioproject01",
+	    storageBucket: "gideonamaniaudioproject01.appspot.com",
+	    messagingSenderId: "282223454104"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+
+	<style type="text/css">
+
+
+
+	</style>
+
+</head>
+<body>
+	<div class="container">
+
+	</div>
+
+
+	<script type="text/javascript">
+		// starting script for Firebase docs https://firebase.google.com/docs/database/security/indexing-data,
+		// https://firebase.google.com/docs/database/web/lists-of-data
+		// var myUserId = firebase.auth().currentUser.uid;
+		// var topUserPostsRef = firebase.database().ref('user-posts/' + myUserId).orderByChild('starCount');
+		var d_ref = firebase.database().ref('deadlines').orderByChild('deadlineDate').limitToFirst(1);
+		d_ref.once('value').then(snap => console.log( snap.val() ) );
+		// d_ref.once('value', snap => console.log( snap.val() ) );
+
+
+		var c_ref = firebase.database().ref('deadlines').orderByChild('criticalLevel').limitToFirst(1);
+		c_ref.once('value').then(snap => console.log( "lowest CL:", snap.val() ) );
+
+		var obk_ref = firebase.database().ref('deadlines/787878').orderByKey().limitToFirst(1);
+		obk_ref.once('value').then(snap => console.log( "lowest key:", snap.val() ) );
+
+		var obv_ref = firebase.database().ref('deadlines/787878').orderByValue().limitToFirst(1);
+		obv_ref.once('value').then(snap => console.log( "lowest value:", snap.val() ) );
+
+// Lexicographical: Mind that strings are treated differently to numbers,
+// "80000" < 3
+// Also be careful of nulls, try to ensure that they are non-existant since 
+// nodes with null will rank lower to any other node with some data
+		var json = {
+			"787878": {
+				"deadlineDate": "999999",
+				"postDate": "780000",
+				"criticalLevel": "2"
+			},
+			"667878": {
+				"deadlineDate": "881818",
+				"postDate": "660000",
+				"criticalLevel": "1"
+			},
+			"447878": {
+				"deadlineDate": "772233",
+				"postDate": "440000",
+				"criticalLevel": "2"
+			},
+			"227878": {
+				"deadlineDate": "998888",
+				"postDate": "220000",
+				"criticalLevel": "3"
+			},
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+	<title> Paper-card </title>
+
+	<!-- <link rel="stylesheet" media="(max-width: 600px)" href="small-devices.css" /> -->
+
+	<style type="text/css">
+	body {
+		box-sizing: border-box;
+	}
+
+	.container {
+		max-width: 960px;
+		margin: 0 auto;
+	}
+
+	.elevation {
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-outer-container {
+	    box-sizing: border-box;
+	    width: calc(0.5 * (100% - 4px));
+	    min-width: 45%;
+	    max-width: 50%;
+	    /*width: calc(0.33333333 * (100% - 8px));
+	    min-width: 33.0%;
+	    max-width: 33.33333%;*/
+	    padding: 0.125rem;
+	    display: inline-block;
+    }
+	@media (max-width: 600px) {
+		.card-outer-container {
+			width: 100%;
+			min-width: 100%;
+			max-width: 100%;
+		}
+	}
+    .card-container {
+    	box-sizing: border-box;
+    	border-radius: 2px;
+    	width: 100%;
+    }
+    .image-head{
+    	border-radius: 2px;
+    	width: 100%;
+		height: calc(100vw/4);
+		/*width: 100%;
+		padding-bottom: 75%;*/
+		background-color: #f9f9f9;
+    	background-size: cover;
+    	background-repeat: no-repeat;
+    	background-position: center center;
+    }
+   
+    .title-text {
+
+    }
+    .no-wrap-text {
+    	white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    }
+    .title-text h3 {
+    	text-align: center;
+    	margin-bottom: -0.5rem;
+    }
+    .title-text h4 {
+	    font-style: italic;
+    	text-align: center;
+    	color: gray;
+    	font-size: 1rem;
+    	font-weight: 400;
+    	text-transform: lowercase;
+    	tex
+    }
+    .action-buttons {
+    	border-top: solid 1px lightgray;
+    	display: flex;
+    	justify-content: space-between;
+    	padding: 0.5rem;
+    }
+    .action-buttons button {
+    	text-align: center;
+    	font-size: 1rem;
+    	border: none;
+    	border: solid 1px #f8f8f8;
+    	background-color: #e8e8e8;
+    	padding: 0.5rem;
+    	border-radius: 0.25rem;
+    }
+    h1, h2, h3, h4, h5 ,h6, p {
+    	margin: 0.5rem;
+    	padding: 0;
+    	border: 0;
+    }
+    .action-buttons button p {
+    	color: #6f6f6f;
+    	text-transform: uppercase;
+	    font-size: 0.9rem;
+    }
+    .action-buttons button:active {
+    	background-color: #eeeeee;
+    }
+    .action-buttons button:active.{
+	    outline: turquoise auto 5px;
+    }
+    .yellow {
+    	color: yellow;
+    }
+    @media
+
+	</style>
+</head>
+<body>
+	<div class="container">
+
+		<div class="card-outer-container">
+			<div class="card-container elevation">
+				<div class="image-head">
+					<!-- <img src="https://s-media-cache-ak0.pinimg.com/originals/ca/c2/b8/cac2b81e33f90b8244fed982f943509e.jpg"> -->
+				</div>
+				<div class="title-text">
+					<h3 class="no-wrap-text">Lorem ipsum laborum.</h3>
+					<h4 class="no-wrap-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</h4>
+				</div>
+				<div class="action-buttons">
+					<button><p>Hello Click Me</p></button>
+					<button><p>Blah BLaH Click Me</p></button>
+				</div>
+			</div>
+		</div>
+
+		<div class="card-outer-container">
+			<div class="card-container elevation">
+				<div class="image-head">
+					<!-- <img src="https://s-media-cache-ak0.pinimg.com/originals/ca/c2/b8/cac2b81e33f90b8244fed982f943509e.jpg"> -->
+				</div>
+				<div class="title-text">
+					<h3 class="no-wrap-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+					<h4 class="no-wrap-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</h4>
+				</div>
+				<div class="action-buttons">
+					<button><p>Hello Click Me</p></button>
+					<button><p>Blah BLaH Click Me</p></button>
+				</div>
+			</div>
+		</div>
+
+		<div class="card-outer-container">
+			<div class="card-container elevation">
+				<div class="image-head" style="
+    	background-image: url('https://s-media-cache-ak0.pinimg.com/originals/ca/c2/b8/cac2b81e33f90b8244fed982f943509e.jpg');">
+				</div>
+				<div class="title-text">
+					<h3 class="no-wrap-text">Lorem </h3>
+					<h4 class="no-wrap-text"> ipsum </h4>
+				</div>
+				<div class="action-buttons">
+					<button><p>Hello Click Me</p></button>
+					<button><p>Blah BLaH Click Me</p></button>
+				</div>
+			</div>
+		</div>
+
+		<div class="card-outer-container">
+			<div class="card-container elevation">
+				<div class="image-head">
+					<!-- <img src="https://s-media-cache-ak0.pinimg.com/originals/ca/c2/b8/cac2b81e33f90b8244fed982f943509e.jpg"> -->
+				</div>
+				<div class="title-text">
+					<!-- You cant do multiple class decarations like this bro -->
+					<h3 class="no-wrap-text" class="yellow">Godem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+					<h4 class="no-wrap-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</h4>
+				</div>
+				<div class="action-buttons">
+					<button><p>Hello Click Me</p></button>
+					<button><p>Blah BLaH Click Me</p></button>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div class="card-outer-container">
+			<div class="card-container elevation">
+				<div class="image-head">
+					<!-- <img src="https://s-media-cache-ak0.pinimg.com/originals/ca/c2/b8/cac2b81e33f90b8244fed982f943509e.jpg"> -->
+				</div>
+				<div class="title-text">
+					<h3 class="no-wrap-text" style="line-height: 2.5rem; font-style: italic;">
+						New Group Name
+					</h3>
+					<h4 class="no-wrap-text"></h4>
+				</div>
+				<div class="action-buttons" style="justify-content: center;">
+					<button><p>Creat New</p></button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
