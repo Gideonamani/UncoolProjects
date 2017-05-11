@@ -9,6 +9,29 @@
 
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
+	<style>
+		.bottom-block {
+			cursor: pointer;
+		}
+		.bottom-block .icon-container {
+			opacity: 0.2;
+		}
+		.bottom-block .icon-container:active {
+			opacity: 1;
+		}
+		.icon-container.engaged {
+			opacity: 1;
+		}
+		.green-highlight {
+			color: #66cdaa;
+			/*border: solid #66cdaa 1px;
+			border-radius: 0 4px;*/			
+		}
+		.bg-gray {
+			background-color: #eee;
+			border-radius: 2px;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -89,24 +112,24 @@
 						<div class="icon-container" style="background-image: url('images/ic_thumb_up.svg')">
 							
 						</div>
-						<div class="text-stats">
-							<p> 20.4K </p>
+						<div class="stats-text">
+							<p data-engagement-counter="20443"> 20.4K </p>
 						</div>
 					</div>
 					<div class="bookmark-block bottom-block">
 						<div class="icon-container" style="background-image: url('images/Bookmark.svg')">
 							
 						</div>
-						<div class="text-stats">
-							<p> 999.9K </p>
+						<div class="stats-text">
+							<p data-engagement-counter="999922"> 999.9K </p>
 						</div>
 					</div>
 					<div class="comment-block bottom-block">
 						<div class="icon-container" style="background-image: url('images/Comments Filled.svg')">
 							
 						</div>
-						<div class="text-stats">
-							<p> 534 </p>
+						<div class="stats-text">
+							<p data-engagement-counter="534"> 534 </p>
 						</div>						
 					</div>
 				</div>
@@ -124,7 +147,6 @@
 						<h5 class="feed-item-datetime"> 13-04-2017 </h5>
 					</div>
 					<div class="more-options">
-						<!-- <img src=""> -->
 						<div class="small-circle"></div>
 						<div class="small-circle"></div>
 						<div class="small-circle"></div>
@@ -147,16 +169,16 @@
 						<div class="icon-container" style="background-image: url('images/ic_thumb_up.svg')">
 							
 						</div>
-						<div class="text-stats">
-							<p> 12 </p>
+						<div class="stats-text">
+							<p data-engagement-counter="12"> 12 </p>
 						</div>
 					</div>
 					<div class="comment-block bottom-block">
 						<div class="icon-container" style="background-image: url('images/Comments Filled.svg')">
 							
 						</div>
-						<div class="text-stats">
-							<p> 4 </p>
+						<div class="stats-text">
+							<p data-engagement-counter="4"> 4 </p>
 						</div>						
 					</div>
 				</div>
@@ -174,7 +196,6 @@
 						<h5 class="feed-item-datetime"> 13-04-2017 </h5>
 					</div>
 					<div class="more-options">
-						<!-- <img src=""> -->
 						<div class="small-circle"></div>
 						<div class="small-circle"></div>
 						<div class="small-circle"></div>
@@ -205,16 +226,16 @@
 						<div class="icon-container" style="background-image: url('images/ic_thumb_up.svg')">
 							
 						</div>
-						<div class="text-stats">
-							<p> 2 </p>
+						<div class="stats-text">
+							<p data-engagement-counter="2"> 2 </p>
 						</div>
 					</div>
 					<div class="comment-block bottom-block">
 						<div class="icon-container" style="background-image: url('images/Comments Filled.svg')">
 							
 						</div>
-						<div class="text-stats">
-							<p> 0 </p>
+						<div class="stats-text">
+							<p data-engagement-counter="0"> 0 </p>
 						</div>						
 					</div>
 				</div>
@@ -228,11 +249,59 @@
 		</div>
 	</footer>
 
+
+
+	<script type="text/javascript">
+		// script from "http://stackoverflow.com/questions/9461621/how-to-format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900-in-javascrip"
+
+		function shortenLargeNumber(num, digits) {
+		    var units = ['k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
+		        decimal;
+
+		    for(var i=units.length-1; i>=0; i--) {
+		        decimal = Math.pow(1000, i+1);
+
+		        if(num <= -decimal || num >= decimal) {
+		            return +(num / decimal).toFixed(digits) + units[i];
+		        }
+		    }
+
+		    return num;
+		}	
+		document.querySelectorAll(".bottom-block").forEach(function(el){
+			// Add event listeners to all the bottom blocks (ie, like, bookmark and comment)
+			el.addEventListener('click', function(){
+
+				// whenever we click we want to give feedback with a slight light gray blink
+				// that this area has been clicked and the action (like or bookmark) has
+				// been engaged
+				el.classList.add("bg-gray");
+				setTimeout(function(){
+					el.classList.remove("bg-gray");
+				}, 100);
+
+				// Then we change the colour of the icon to give a postive feedback
+				// also we adjust the stats number up or down by one.
+				var iconContainer = el.querySelector(".icon-container");
+				var statsTextP = el.querySelector(".stats-text p");
+				var currentCount = Number(statsTextP.dataset.engagementCounter);
+				var updatedCount;
+
+				if( !iconContainer.className.includes("engaged") ){
+					updatedCount = currentCount+1;
+					statsTextP.classList.add("green-highlight");
+				}else{
+					updatedCount = currentCount-1;
+					statsTextP.classList.remove("green-highlight");
+				}
+
+				statsTextP.dataset.engagementCounter = updatedCount;
+				statsTextP.textContent = String( shortenLargeNumber(updatedCount, 1) );
+				console.log("clicked", updatedCount);
+				iconContainer.classList.toggle("engaged");
+			})
+		})
+	</script>
 </body>
 
-
-
-<body>
-	
-</body>
 </html>
