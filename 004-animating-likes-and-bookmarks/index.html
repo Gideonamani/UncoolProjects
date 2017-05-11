@@ -240,7 +240,10 @@
 					</div>
 				</div>
 			</div>
-		</div>		
+		</div>	
+		<div style="padding: 8px 4px;">
+			<h6> Click this to randomize the stat numbers. <button onclick="randomizeStats()">Randomize!</button></h6>
+		</div>	
 	</div>
 	<footer>
 		<div class="footer-container">
@@ -253,7 +256,6 @@
 
 	<script type="text/javascript">
 		// script from "http://stackoverflow.com/questions/9461621/how-to-format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900-in-javascrip"
-
 		function shortenLargeNumber(num, digits) {
 		    var units = ['k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
 		        decimal;
@@ -267,7 +269,17 @@
 		    }
 
 		    return num;
-		}	
+		}
+
+		randomizeStats = function(){
+			document.querySelectorAll(".stats-text p").forEach(function(el){
+				var statsTextP = el;
+				var randNum = Math.floor(Math.random(1) * 2000);
+				statsTextP.dataset.engagementCounter = randNum;
+				statsTextP.textContent = String( shortenLargeNumber(randNum, 1) );
+			})
+		}
+
 		document.querySelectorAll(".bottom-block").forEach(function(el){
 			// Add event listeners to all the bottom blocks (ie, like, bookmark and comment)
 			el.addEventListener('click', function(){
@@ -297,8 +309,8 @@
 
 				statsTextP.dataset.engagementCounter = updatedCount;
 				statsTextP.textContent = String( shortenLargeNumber(updatedCount, 1) );
-				console.log("clicked", updatedCount);
 				iconContainer.classList.toggle("engaged");
+				// console.log("clicked", updatedCount);
 			})
 		})
 	</script>
