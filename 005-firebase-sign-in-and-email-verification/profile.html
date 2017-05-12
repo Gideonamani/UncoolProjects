@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+	<title> UncoolProjects | 005 Firebase Sign In </title>
+
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="profile-header">
+			<div class="avatar-c">
+				<img src="../001-some-gsb-mock-pages/images/avatar 3.png">
+			</div>
+			<div class="text-c">
+				<h2>Oliver Olympian Master 25</h2>
+				<p title="olivercoolsminimum-scale=1.0@cooness.com">olivercoolsminimum-scale=1.0@cooness.com</p>
+			</div>
+		</div>
+		<div class="profile-dashboard">
+			<div class="stat-box">
+				<h4 class="stat-figure"> 567 </h4>
+				<h5 class="stat-title"><a href="heart-animate.html"> Lecture Notes </a></h5>
+			</div>
+			<div class="stat-box">
+				<h4 class="stat-figure"> 33 </h4>
+				<h5 class="stat-title"> Comments </h5>
+			</div>
+			<div class="stat-box">
+				<h4 class="stat-figure"> 85 </h4>
+				<h5 class="stat-title"> Likes </h5>
+			</div>
+		</div>
+		<div class="tabs">
+			<div class="tab highlighted">
+				<h3>Bookmarks</h3>
+			</div>
+			<div class="tab">
+				<h3>Contributions</h3>
+			</div>
+		</div>
+
+
+
+		<div class="feed-item-outer-container">
+			<div class="feed-item-inner-container">
+				<div class="feed-header">
+					<div class="avatar-container">
+						<img src="../001-some-gsb-mock-pages/images/avatar.jpg">
+					</div>
+					<div class="feed-header-text">
+						<h3 class="profile-name"> Oliver Cool$$ </h3>
+						<h5 class="feed-item-datetime"> 13-04-2017 </h5>
+					</div>
+					<div class="more-options">
+						<!-- <img src=""> -->
+						<div class="small-circle"></div>
+						<div class="small-circle"></div>
+						<div class="small-circle"></div>
+					</div>
+				</div>
+
+				<div class="feed-main-content">
+					<div class="icon-container">
+						<img src="../001-some-gsb-mock-pages/images/note.svg" class="feed-type-icon">
+					</div>
+					<div class="feed-main-content-text">
+						<h2 class="lecture-heading">
+							Interesting Facts that everyone in the world should hear.
+							И они это знает.
+						</h2>
+						<h4 class="additional-info">
+							Lecture Date: 
+							<span class="bold">14th April 2017</span>
+						</h4>
+						<h4 class="additional-info">
+							Course: 
+							<span class="bold">Distributing and Logistics II</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="feed-bottom">
+					<div class="like-block bottom-block">
+						<div class="icon-container" style="background-image: url('../001-some-gsb-mock-pages/images/ic_thumb_up.svg')">
+							
+						</div>
+						<div class="stats-text">
+							<p data-engagement-counter="20443"> 20.4K </p>
+						</div>
+					</div>
+					<div class="bookmark-block bottom-block">
+						<div class="icon-container" style="background-image: url('../001-some-gsb-mock-pages/images/Bookmark.svg')">
+							
+						</div>
+						<div class="stats-text">
+							<p data-engagement-counter="999922"> 999.9K </p>
+						</div>
+					</div>
+					<div class="comment-block bottom-block">
+						<div class="icon-container" style="background-image: url('../001-some-gsb-mock-pages/images/Comments Filled.svg')">
+							
+						</div>
+						<div class="stats-text">
+							<p data-engagement-counter="534"> 534 </p>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="feed-item-outer-container">
+			<div class="feed-item-inner-container">
+				<div class="feed-header">
+					<div class="avatar-container">
+						<img src="../001-some-gsb-mock-pages/images/avatar.jpg">
+					</div>
+					<div class="feed-header-text">
+						<h3 class="profile-name"> Oliver Cool$$ </h3>
+						<h5 class="feed-item-datetime"> 13-04-2017 </h5>
+					</div>
+					<div class="more-options">
+						<div class="small-circle"></div>
+						<div class="small-circle"></div>
+						<div class="small-circle"></div>
+					</div>
+				</div>
+
+				<div class="feed-main-content">
+					<div class="icon-container">
+						<img src="../001-some-gsb-mock-pages/images/Podium With Speaker.svg" class="feed-type-icon">
+					</div>
+					<div class="feed-main-content-text flex-align-center">
+						<h3 class="notice-and-deadline-heading">
+							Every one with a soul of a dragon shall soar into the heavens with a smile like the one breathens fire.
+						</h3>
+					</div>
+				</div>
+
+				<div class="feed-bottom">
+					<div class="like-block bottom-block">
+						<div class="icon-container" style="background-image: url('../001-some-gsb-mock-pages/images/ic_thumb_up.svg')">
+							
+						</div>
+						<div class="stats-text">
+							<p data-engagement-counter="12"> 12 </p>
+						</div>
+					</div>
+					<div class="comment-block bottom-block">
+						<div class="icon-container" style="background-image: url('../001-some-gsb-mock-pages/images/Comments Filled.svg')">
+							
+						</div>
+						<div class="stats-text">
+							<p data-engagement-counter="4"> 4 </p>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="feed-item-outer-container">
+			<div class="feed-item-inner-container">
+				<div class="feed-header">
+					<div class="avatar-container">
+						<img src="../001-some-gsb-mock-pages/images/avatar.jpg">
+					</div>
+					<div class="feed-header-text">
+						<h3 class="profile-name"> Oliver Cool$$ </h3>
+						<h5 class="feed-item-datetime"> 13-04-2017 </h5>
+					</div>
+					<div class="more-options">
+						<div class="small-circle"></div>
+						<div class="small-circle"></div>
+						<div class="small-circle"></div>
+					</div>
+				</div>
+
+				<div class="feed-main-content">
+					<div class="icon-container">
+						<img src="../001-some-gsb-mock-pages/images/Hourglass.svg" class="feed-type-icon">
+					</div>
+					<div class="feed-main-content-text">
+						<h3 class="notice-and-deadline-heading">
+							Dancing the Tango like a Mango CourseWork.
+						</h3>
+						<h4 class="additional-info">
+							<span class="dark-gray-highlight">Due Date: </span>
+							<span class="bold blue-highlight">27th May 2017</span>
+						</h4>
+						<h4 class="additional-info">
+							Importance: 
+							<span class="bold"> Critical </span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="feed-bottom">
+					<div class="like-block bottom-block">
+						<div class="icon-container" style="background-image: url('../001-some-gsb-mock-pages/images/ic_thumb_up.svg')">
+							
+						</div>
+						<div class="stats-text">
+							<p data-engagement-counter="2"> 2 </p>
+						</div>
+					</div>
+					<div class="comment-block bottom-block">
+						<div class="icon-container" style="background-image: url('../001-some-gsb-mock-pages/images/Comments Filled.svg')">
+							
+						</div>
+						<div class="stats-text">
+							<p data-engagement-counter="0"> 0 </p>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>	
+		<div style="padding: 8px 4px;">
+			<h6> Click this to randomize the stat numbers. <button onclick="randomizeStats()">Randomize!</button></h6>
+		</div>	
+	</div>
+	<footer>
+		<div class="footer-container">
+			<h4 class="this-year"> &#9400; 2017 </h4>
+			<h3 class="company-name"> Group Study Base </h3>
+		</div>
+	</footer>
+
+
+
+	<script type="text/javascript">
+		// script from "http://stackoverflow.com/questions/9461621/how-to-format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900-in-javascrip"
+		function shortenLargeNumber(num, digits) {
+		    var units = ['k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
+		        decimal;
+
+		    for(var i=units.length-1; i>=0; i--) {
+		        decimal = Math.pow(1000, i+1);
+
+		        if(num <= -decimal || num >= decimal) {
+		            return +(num / decimal).toFixed(digits) + units[i];
+		        }
+		    }
+
+		    return num;
+		}
+
+		randomizeStats = function(){
+			document.querySelectorAll(".stats-text p").forEach(function(el){
+				var statsTextP = el;
+				var randNum = Math.floor(Math.random(1) * 2000);
+				statsTextP.dataset.engagementCounter = randNum;
+				statsTextP.textContent = String( shortenLargeNumber(randNum, 1) );
+			})
+		}
+
+		document.querySelectorAll(".bottom-block").forEach(function(el){
+			// Add event listeners to all the bottom blocks (ie, like, bookmark and comment)
+			el.addEventListener('click', function(){
+
+				// whenever we click we want to give feedback with a slight light gray blink
+				// that this area has been clicked and the action (like or bookmark) has
+				// been engaged
+				el.classList.add("bg-gray");
+				setTimeout(function(){
+					el.classList.remove("bg-gray");
+				}, 100);
+
+				// Then we change the colour of the icon to give a postive feedback
+				// also we adjust the stats number up or down by one.
+				var iconContainer = el.querySelector(".icon-container");
+				var statsTextP = el.querySelector(".stats-text p");
+				var currentCount = Number(statsTextP.dataset.engagementCounter);
+				var updatedCount;
+
+				if( !iconContainer.className.includes("engaged") ){
+					updatedCount = currentCount+1;
+					statsTextP.classList.add("green-highlight");
+				}else{
+					updatedCount = currentCount-1;
+					statsTextP.classList.remove("green-highlight");
+				}
+
+				statsTextP.dataset.engagementCounter = updatedCount;
+				statsTextP.textContent = String( shortenLargeNumber(updatedCount, 1) );
+				iconContainer.classList.toggle("engaged");
+				// console.log("clicked", updatedCount);
+			})
+		})
+	</script>
+</body>
+
+</html>
