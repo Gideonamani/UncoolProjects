@@ -10,3 +10,4 @@ Where I put random stuff I'm tinkering on
 
 * [004](https://gideonamani.github.io/UncoolProjects/004-animating-likes-and-bookmarks/)
 
+* [005](https://gideonamani.github.io/UncoolProjects/005-firebase-sign-in-and-email-verification/)
