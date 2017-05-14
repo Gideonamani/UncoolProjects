@@ -280,11 +280,18 @@ function getProfileData(){
   var currentUser = firebase.auth().currentUser;
   var displayNameH2 = document.querySelector("#profile-display-name");
   var emailP = document.querySelector("#profile-email");
+  var avatarImg = document.querySelector("#main-avatar-image");
   // if  user hasn't set the username yet use the email.
   if(currentUser.displayName){
     displayNameH2.textContent = currentUser.displayName;
   }else{
     displayNameH2.textContent = currentUser.email;
+  }
+
+  if(currentUser.photoURL){
+    avatarImg.src = currentUser.photoURL;
+  }else{
+    avatarImg.src = "../001-some-gsb-mock-pages/images/avatar 3.png";
   }
 
   //if the email is unverified

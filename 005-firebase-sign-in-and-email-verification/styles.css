@@ -270,6 +270,7 @@ footer {
 .profile-header .avatar-c img{
     width: 100%;
     max-height: 100px;
+    border-radius: 50%;
 }
 
 .profile-header  .text-c{
