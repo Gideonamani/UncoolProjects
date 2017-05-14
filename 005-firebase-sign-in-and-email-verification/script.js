@@ -74,7 +74,6 @@ function signInUserToFirebase(email, password){
   var errMsgDiv = document.querySelector("#sign-in-page .error-msg-container");
   var errMsgP = document.querySelector("#sign-in-page p.error-msg");
   errMsgDiv.style.display = "none";
-  console.log(errMsgDiv);
   firebase.auth().signInWithEmailAndPassword(email, password).
       then(function(userData){
         console.log("About to send the User Data to DB!");
@@ -280,22 +279,27 @@ function getProfileData(){
   var currentUser = firebase.auth().currentUser;
   var displayNameH2 = document.querySelector("#profile-display-name");
   var emailP = document.querySelector("#profile-email");
-    // if  user hasn't set the username yet use the email.
-    if(currentUser.displayName){
-      displayNameH2.textContent = currentUser.displayName;
-    }else{
-      displayNameH2.textContent = currentUser.email;
-    }
+  // if  user hasn't set the username yet use the email.
+  if(currentUser.displayName){
+    displayNameH2.textContent = currentUser.displayName;
+  }else{
+    displayNameH2.textContent = currentUser.email;
+  }
 
-    //if the email is unverified
-    if(!currentUser.emailVerified){
-      document.querySelector("#profile-email-div").classList.add("email-unverified");
-      document.querySelector("#verify-email-button").hidden = false;
-    }
+  //if the email is unverified
+  if(!currentUser.emailVerified){
+    document.querySelector("#profile-email-div").classList.add("email-unverified");
+    document.querySelector("#verify-email-button").hidden = false;
+  }
 
-    emailP.title = currentUser.email;
-    emailP.textContent = currentUser.email;
-    console.log(currentUser);
+  emailP.title = currentUser.email;
+  emailP.textContent = currentUser.email;
+  console.log(currentUser);
+
+
+  var settingsPg = document.querySelector("#profile-settings-page");
+  settingsPg.querySelector("#profilename").value = currentUser.displayName;
+  settingsPg.querySelector("#profilephotourl").value = currentUser.photoURL;
 }
 
 function verifyEmail(){
@@ -315,7 +319,30 @@ function refresh(){
   window.location = "";
 }
 
+
+
+
 // Profile Setting Functions
+function updateProfileNameNPhoto(){
+  var user = firebase.auth().currentUser;
+  var settingsPg = document.querySelector("#profile-settings-page");
+  var dNameInput = settingsPg.querySelector("#profilename");
+  var pUrlInput = settingsPg.querySelector("#profilephotourl");
+  user.updateProfile({
+    displayName: dNameInput.value,
+    photoURL: pUrlInput.value
+  }).then(function() {
+    // Update successful.
+    getProfileData();
+    showProfilePage();
+    console.info("Update was successful!!");
+  }).catch(function(error) {
+    // An error happened.
+    document.querySelector(".error-div").hidden = false;
+    document.querySelector("#updateErrorMsg").textContent = "ERROR: " + error.message;
+    console.info("ERROR:", error.message);
+  });
+}
 
 
 

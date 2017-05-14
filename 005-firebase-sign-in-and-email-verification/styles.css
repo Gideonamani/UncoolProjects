@@ -282,6 +282,8 @@ footer {
 
 .profile-header  .text-c h2{
 	font-weight: 600;
+	overflow-x: hidden;
+    text-overflow: ellipsis;	
 }
 
 .profile-header  .text-c p{
@@ -601,6 +603,7 @@ header h2 button {
 }
 #profile-settings-page .input-item {
 	border-bottom: dotted #ddd 1px;
+    padding: 4px 4px;
 }
 .input-item p {
 }
@@ -629,8 +632,19 @@ button.sign-out {
     color: whitesmoke;
     font-weight: 600;	
 }
-
-
+.confirm-settings {
+    display: flex;
+    justify-content: flex-end;
+}
+.confirm-settings button {
+    padding: 4px 8px;
+    margin: 0px 4px;
+}
+.error-div #updateErrorMsg {
+    color: crimson;
+    background-color: #ffccdd;
+    padding: 8px;	
+}
 
 
 
