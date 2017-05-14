@@ -65,11 +65,18 @@ function checkSignIn(){
 }
 
 function signInUserToFirebase(email, password){
+  console.log("Sign IN has Started");
   // Signing(Logging) IN a user to your firebase app
+  var errMsgDiv = document.querySelector("#sign-in-page .error-msg-container");
+  var errMsgP = document.querySelector("#sign-in-page p.error-msg");
+  errMsgDiv.style.display = "none";
+  console.log(errMsgDiv);
   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
+    errMsgDiv.style.display = "block";
+    errMsgP.textContent = "ERROR: " + errorMessage;
     console.log("Sign IN Error. \n Error:", errorCode, " \n The Message is:", errorMessage);
   });
 }
@@ -81,35 +88,67 @@ function checkSignUp(){
       input.reportValidity();
     }
   )
-  // // Make sure first that the passwords match
-  // if(!document.querySelector("#sign-up-page").querySelector("input:invalid")){
-  //   var email = document.querySelector("#sign-in-page").querySelector("input#useremail").value;
-  //   var password = document.querySelector("#sign-in-page").querySelector("input#password").value;
-  //   signUpUserToFirebase(email, password);
-  // }
+  // Make sure first that the passwords match
+  if( !document.querySelector("#sign-up-page input:invalid")
+    && !document.querySelector("input.chceck-failed") ){
+    var email = document.querySelector("#sign-up-page input#useremail").value;
+    var password = document.querySelector("#sign-up-page input#password").value;
+    signUpUserToFirebase(email, password);
+  }
 }
 
 function signUpUserToFirebase(email, password){
+  console.log("Sign UP has Started");
+  // Signing(Logging) IN a user to your firebase app
+  var errMsgDiv = document.querySelector("#sign-up-page .error-msg-container");
+  var errMsgP = document.querySelector("#sign-up-page p.error-msg");
+  errMsgDiv.style.display = "none";
   // Signing UP a user to your firebase app
   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
+    errMsgDiv.style.display = "block";
+    errMsgP.textContent = "ERROR: " + errorMessage;
     console.log("Sign UP Error. \n Error:", errorCode, " \n The Message is:", errorMessage);
   });
 }
 
-// adding a custom html validation info
-// this is for checking if the passwords match
-document.querySelector("input").addEventListener("onkeyup")
+window.onload = function(){
+  listenForFirstKeyUpOnCPI();
+}
 
+// function to listen for the first key up event on the Confirm Password Input
+function listenForFirstKeyUpOnCPI(){
+  document.querySelector("#sign-up-page #confirm-password").addEventListener("keyup", function(e){
+    var passConfirmInput = e.target;
+    var passInput = document.querySelector("#sign-up-page #password");
+    checkIfPasswordsMatch(passInput, passConfirmInput);
+    listenForKeyUpOnPassInput();
+  })
+}
 
-function passwordsMatch(passInput, passConfirmInput){
+function listenForKeyUpOnPassInput(){
+  document.querySelector("#sign-up-page #password").addEventListener("keyup", function(e){
+    var passInput = e.target;
+    var passConfirmInput = document.querySelector("#sign-up-page #confirm-password");
+    checkIfPasswordsMatch(passInput, passConfirmInput);
+  })
+}
+
+function checkIfPasswordsMatch(passInput, passConfirmInput){
+  var submitBtn = document.querySelector("#sign-up-page input[type='submit']");
   if(passInput.value === passConfirmInput.value){
     // add classes to show that they now match
-    
+    passConfirmInput.classList.remove("check-failed");
+    passConfirmInput.classList.add("check-passed");
     // enable send button
-    button.disabled = false;
+    submitBtn.disabled = false;
+  }else {
+    passConfirmInput.classList.remove("check-passed");
+    passConfirmInput.classList.add("check-failed");
+    //disable send button
+    submitBtn.disabled = true;
   }
 }
 

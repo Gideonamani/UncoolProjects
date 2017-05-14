@@ -43,6 +43,9 @@
 			max-width: 400px;
 			margin: 0.5rem 0 1rem;
 		}
+		input[type="submit"]:disabled {
+			background-color: #cacaca;
+		}
 		input:invalid.checkedValidity {
 			border: solid red 2px;
 			border-radius: 4px;
@@ -90,25 +93,41 @@
 		.landing .buttons-container button:active {
 			background: linear-gradient( #33fc41, #68de87);
 		}
-		.no-match-passwords {
+		.no-match-info-p {
 			color: red;
 			display: none;
 		}
 		.auth-page {
-			/*display: none;*/
+			display: none;
+		}
+		.input-item input.check-failed {
+			border: solid red 1px;
+		}
+		/*.input-item input.check-failed:focus {
+			border: solid pink 1px;
+		}*/
+		.input-item input.check-failed + p.no-match-info-p {
+			display: hidden;
+		}
+		.input-item input.check-failed:not(:focus) + p.no-match-info-p {
+			display: block;
+		}
+		.error-msg {
+			color: red;
+			font-size: 1.1rem;
 		}
 	</style>
 </head>
 <body>
 	<div class="container">
-<!-- 		<div class="landing" id="landing">
+		<div class="landing" id="landing">
 			<h1> Hey there... Welcome. </h1>
 			<h2> Please Log In or Sign Up to continue </h2>
 			<div class="buttons-container">
 				<button onclick="showSignInPage()"> Log In </button>
 				<button onclick="showSignUpPage()"> Sign Up</button>
 			</div>
-		</div> -->
+		</div>
 
 
 		<div class="auth-page" id="sign-up-page">
@@ -138,9 +157,12 @@
 				<div class="input-item">
 					<label for="confirm-password">
 						<p>Confirm Password</p>
-						<input type="password" name="confirm-password" id="confirm-password" required="true">
-						<p class="no-match-passwords">Passwords do not match!</p>
+						<input type="password" name="confirm-password" id="confirm-password" class="no-match-check" required="true">
+						<p class="no-match-info-p">Passwords do not match!</p>
 					</label>
+				</div>
+				<div class="input-item ta-center error-msg-container" style="display: none">
+					<p class="error-msg"></p>
 				</div>
 				<div class="input-item ta-center">
 					<label for="submit">
@@ -152,7 +174,7 @@
 		</div>
 
 
-<!-- 		<div class="auth-page" id="sign-in-page">
+		<div class="auth-page" id="sign-in-page">
 
 			<div class="auth-header">
 				<h2>Sign In! <button onclick="returnHome()">Cancel</button></h2>
@@ -170,6 +192,9 @@
 						<input type="password" name="password" id="password" required="true" autocomplete="password">
 					</label>
 				</div>
+				<div class="input-item ta-center error-msg-container" style="display: none">
+					<p class="error-msg"></p>
+				</div>
 				<div class="input-item ta-center">
 					<label for="submit">
 						<input type="submit" name="submit" id="submit" onclick="checkSignIn()">
@@ -177,7 +202,7 @@
 				</div>
 			</div>
 			
-		</div> -->
+		</div>
 	</div>
 	<footer>
 		<div class="footer-container">
