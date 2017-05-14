@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-	<title> Group Study Base | Design Home </title>
+	<title> Uncool Projects | Firebase Querying </title>
 		
 	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 	<script>
@@ -22,15 +22,76 @@
 	</script>
 
 	<style type="text/css">
+		body {
+			font-family: sans-serif;
+		}
+		h1, h2, h3, h4, h5, h6, p {
+			padding: 0;
+			border: 0;
+			margin: 0;
+		}
+		p {
+			padding: 4px 8px;
+			font-size: 1.2rem;
+		}
+		p span {
+			padding: 0 2px;
+		    background: azure;	
+	        margin: 0 4px;		
+		}
+		header h2 {
+			border-bottom: solid lightgray 1px;
+			margin-bottom: 8px;
+		}
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+		.card {
+			background: whitesmoke;
+			border-radius: 4px;
+			margin-bottom: 8px;
+		}
+		.card .first-name {
 
+		}
 
+		.card .last-name {
+
+		}
+		.footnote p {
+			display: inline-block;
+		}
+		.footnote .age-number {
+
+		}
+		.footnote .year-joined {
+
+		}
+		.query-section {
+			border: solid #00BCD4 1px;
+			border-radius: 4px;
+			padding: 2px;
+			margin: 8px 0;
+		}
+		.query-headline {
+		    border-bottom: dotted gray 1px;
+		    margin: 4px 0;
+		}
+		.query-highlight {
+			border: solid turquoise 1px;
+			border-radius: 2px;
+			background-color: paleturquoise;
+		}
 
 	</style>
 
 </head>
 <body>
 	<div class="container">
-
+		<header>
+			<h2>Querying with Firebase</h2>
+		</header>
 	</div>
 
 
@@ -44,41 +105,154 @@
 		// d_ref.once('value', snap => console.log( snap.val() ) );
 
 
-		var c_ref = firebase.database().ref('deadlines').orderByChild('criticalLevel').limitToFirst(1);
-		c_ref.once('value').then(snap => console.log( "lowest CL:", snap.val() ) );
+		// var c_ref = firebase.database().ref('deadlines').orderByChild('criticalLevel').limitToFirst(1);
+		// c_ref.once('value').then(snap => console.log( "lowest CL:", snap.val() ) );
 
-		var obk_ref = firebase.database().ref('deadlines/787878').orderByKey().limitToFirst(1);
-		obk_ref.once('value').then(snap => console.log( "lowest key:", snap.val() ) );
+		// var c_ref = firebase.database().ref('deadlines').orderByChild('criticalLevel');
+		// c_ref.once('value').then(snap => printJSON( snap.val() ) );
 
-		var obv_ref = firebase.database().ref('deadlines/787878').orderByValue().limitToFirst(1);
-		obv_ref.once('value').then(snap => console.log( "lowest value:", snap.val() ) );
+		// var obk_ref = firebase.database().ref('deadlines/787878').orderByKey().limitToFirst(1);
+		// obk_ref.once('value').then(snap => console.log( "lowest key:", snap.val() ) );
+
+		// var obv_ref = firebase.database().ref('deadlines/787878').orderByValue().limitToFirst(1);
+		// obv_ref.once('value').then(snap => console.log( "lowest value:", snap.val() ) );
 
 // Lexicographical: Mind that strings are treated differently to numbers,
 // "80000" < 3
 // Also be careful of nulls, try to ensure that they are non-existant since 
 // nodes with null will rank lower to any other node with some data
+		// var json = {
+		// 	"787878": {
+		// 		"deadlineDate": "999999",
+		// 		"postDate": "780000",
+		// 		"criticalLevel": "2"
+		// 	},
+		// 	"667878": {
+		// 		"deadlineDate": "881818",
+		// 		"postDate": "660000",
+		// 		"criticalLevel": "1"
+		// 	},
+		// 	"447878": {
+		// 		"deadlineDate": "772233",
+		// 		"postDate": "440000",
+		// 		"criticalLevel": "2"
+		// 	},
+		// 	"227878": {
+		// 		"deadlineDate": "998888",
+		// 		"postDate": "220000",
+		// 		"criticalLevel": "3"
+		// 	},
+		// }
+
 		var json = {
-			"787878": {
-				"deadlineDate": "999999",
-				"postDate": "780000",
-				"criticalLevel": "2"
+			"11": {
+				"firstName": "Blue",
+				"lastName": "Azure",
+				"age": "34",
+				"yearJoined": 20
 			},
-			"667878": {
-				"deadlineDate": "881818",
-				"postDate": "660000",
-				"criticalLevel": "1"
+			"22": {
+				"firstName": "Eldo",
+				"lastName": "Jupiter",
+				"age": "9",
+				"yearJoined": 21
 			},
-			"447878": {
-				"deadlineDate": "772233",
-				"postDate": "440000",
-				"criticalLevel": "2"
+			"33": {
+				"firstName": "Canny",
+				"lastName": "Zoo",
+				"age": "3",
+				"yearJoined": 19
 			},
-			"227878": {
-				"deadlineDate": "998888",
-				"postDate": "220000",
-				"criticalLevel": "3"
+			"44": {
+				"firstName": "Antonio",
+				"lastName": "Kane",
+				"age": "6",
+				"yearJoined": 14
 			},
+			"55": {
+				"firstName": "Mustafi",
+				"lastName": "Joe",
+				"age": "66",
+				"yearJoined": 12
+			}
+		};
+
+
+
+
+		function printJSON(json){
+			for (var key in json) {
+			  if (json.hasOwnProperty(key)) {
+			    console.log(key + " -> " + json[key]);
+			  }
+			}
 		}
+
+		function displayJSON(json){
+			var containerDiv = document.querySelector(".container");
+			for (var key in json) {
+				if(json.hasOwnProperty(key)){
+					var cardDiv = document.createElement("DIV");
+					cardDiv.classList.add("card");
+					var htmlText = `
+							<p><span class="first-name"> ${json[key].firstName} </span> <span class="last-name"> ${json[key].lastName}</span> </p>
+							<div class="footnote">
+								<p>Age: <span class="age-number">${json[key].age}</span></p>
+								<p>Joined: '<span class="year-joined">${json[key].yearJoined}</span></p>
+							</div>` ;
+					cardDiv.innerHTML = htmlText;
+					containerDiv.append(cardDiv);
+				}
+			}
+		}
+
+		function displaySortedJSON(json, sortProperty, descending){
+			var containerDiv = document.querySelector(".container");
+			var querySectionDiv = document.createElement("DIV");
+			querySectionDiv.classList.add("query-section");
+
+			var queryHeadline = document.createElement("H3");
+			queryHeadline.classList.add("query-headline");
+			queryHeadline.textContent = "Query sorted by: " + sortProperty;
+			querySectionDiv.append(queryHeadline);
+
+			var array = Object.keys(json).map(x => json[x]);
+			array.sort(function(a, b) {
+				if(!descending){
+				    return a[sortProperty] - b[sortProperty];
+				}else{
+					return b[sortProperty] - a[sortProperty];
+				}
+			});
+
+
+			console.log(array);
+			array.forEach(function(objectItem){
+				
+				var cardDiv = document.createElement("DIV");
+				cardDiv.classList.add("card");
+				var htmlText = `
+						<p><span class="first-name"> ${objectItem.firstName} </span> <span class="last-name"> ${objectItem.lastName}</span> </p>
+						<div class="footnote">
+							<p>Age: <span class="age-number">${objectItem.age}</span></p>
+							<p>Joined: '<span class="year-joined">${objectItem.yearJoined}</span></p>
+						</div>` ;
+				cardDiv.innerHTML = htmlText;
+				querySectionDiv.append(cardDiv);				
+			});
+
+			containerDiv.append(querySectionDiv);
+		}
+
+
+		function getFromDB(childToOrder){
+			var ref = firebase.database().ref('queryTest').orderByChild(childToOrder);
+			ref.on('value', function(snap){
+				displaySortedJSON( snap.val(), childToOrder );
+			});
+		}
+
+		getFromDB("age");
 	</script>
 </body>
 </html>
