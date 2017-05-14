@@ -338,7 +338,15 @@ footer {
     font-weight: 400;
 }
 
-
+.edit-profile-link {
+    background-color: #B0BEC5;
+    min-height: 100%;
+    min-width: 40px;
+    background-image: url(../001-some-gsb-mock-pages/images/settings.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center, center;
+}
 
 
 
@@ -568,3 +576,78 @@ footer {
 	background-color: #eee;
 	border-radius: 2px;
 }
+
+header h2 {
+	padding: 2px 8px;
+	border-bottom: solid #ccc 1px;
+}
+header h2 button {
+	float: right;
+	margin: 5px 0;
+	background: turquoise;
+}
+/*header h2 button a {
+	width: 100%;
+	padding: 2px 8px;
+	margin: 0 -7px;
+	color: black;
+}*/
+.input-section {
+    padding-bottom: 4px;
+    border-bottom: solid #E0E0E0 2px;
+}
+#profile-settings-page .input-section .input-item:last-child {
+	border: 0;
+}
+#profile-settings-page .input-item {
+	border-bottom: dotted #ddd 1px;
+}
+.input-item p {
+}
+
+div.email-unverified {
+	background-color: hotpink;
+	margin: 4px 0;
+	padding: 4px;
+}
+
+div.email-unverified p#verification-sent-info {
+    white-space: normal;
+    color: white;
+    border-top: solid whitesmoke 1px;
+}
+
+div.email-unverified button {
+    width: 100%;
+    padding: 4px 8px;
+    background: turquoise;
+}
+button.sign-out {
+	width: 100%;
+    padding: 4px 8px;
+    background: linear-gradient(#8ef2ff, #66b6f5);
+    color: whitesmoke;
+    font-weight: 600;	
+}
+
+
+
+
+
+/*Loading animation*/
+#loading-screen {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center
+}
+#loading-screen img {
+	animation:spin 4s linear infinite;
+}
+
+#loading-screen h3 {
+	margin-top: 40px;
+}
+
+ @keyframes spin { 100% { -webkit-transform: rotateZ(360deg); transform:rotateZ(360deg); } }

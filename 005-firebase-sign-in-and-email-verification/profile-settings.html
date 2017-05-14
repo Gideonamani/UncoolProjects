@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+	<title> UncoolProjects | 005 Firebase Sign In | Profile Settings </title>
+
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+
+	<style>
+		header h2 {
+			padding: 2px 8px;
+			border-bottom: solid #ccc 1px;
+		}
+		header h2 button {
+			float: right;
+			margin: 5px 0;
+		}
+		header h2 button a {
+			width: 100%;
+			padding: 2px 8px;
+			margin: 0 -7px;
+			background: turquoise;
+			color: black;
+		}
+		.settings-inputs {
+			padding: 0 8px;
+		}
+		.input-section {
+		    padding-bottom: 4px;
+		    border-bottom: solid #E0E0E0 2px;
+		}
+		#profile-settings-page .input-section .input-item:last-child {
+			border: 0;
+		}
+		#profile-settings-page .input-item {
+			border-bottom: dotted #ddd 1px;
+		}
+		.input-item p {
+		}
+		.input-item input {
+			box-sizing: border-box;
+			width: 100%;
+			border: solid #444 1px;
+			border-radius: 2px;
+			padding: 0.25rem 0.5rem;
+			font-size: 1.15rem;
+			font-weight: 200;
+		}		
+	</style>
+
+</head>
+<body>
+	<div class="container" style="background-color: #ECEFF1; min-height: 400px; margin-bottom: -4px;">
+		<header>
+			<h2>Profile Settings <button><a href="profile.html">Cancel</a></button></h2>
+		</header>
+
+		<div class="settings-inputs">
+			<div class="input-section">
+				<div class="input-item">
+					<label for="username">
+						<p>Username</p>
+						<input type="text" name="username" id="username" required="true">
+					</label>
+				</div>
+				<div class="input-item">
+					<label for="useremail">
+						<p>Email</p>
+						<input type="email" name="useremail" id="useremail" required="true">
+					</label>
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+	<footer>
+		<div class="footer-container">
+			<h4 class="this-year"> &#9400; 2017 </h4>
+			<h3 class="company-name"> Group Study Base </h3>
+		</div>
+	</footer>
+
+
+
+</body>
+
+</html>

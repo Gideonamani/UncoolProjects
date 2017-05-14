@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-	<title> UncoolProjects | 005 Firebase Sign In </title>
+	<title> UncoolProjects | 005 Firebase Sign In | Profile </title>
 
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+	<script src="script.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -24,7 +25,7 @@
 		<div class="profile-dashboard">
 			<div class="stat-box">
 				<h4 class="stat-figure"> 567 </h4>
-				<h5 class="stat-title"><a href="heart-animate.html"> Lecture Notes </a></h5>
+				<h5 class="stat-title"> Lecture Notes </h5>
 			</div>
 			<div class="stat-box">
 				<h4 class="stat-figure"> 33 </h4>
@@ -42,6 +43,10 @@
 			<div class="tab">
 				<h3>Contributions</h3>
 			</div>
+			<!-- <a href="profile-settings.html"> -->
+				<div class="edit-profile-link" title="Edit Profile" onclick="showProfileSettingsPage()">				
+				</div>
+			<!-- </a> -->
 		</div>
 
 
@@ -232,64 +237,7 @@
 
 
 	<script type="text/javascript">
-		// script from "http://stackoverflow.com/questions/9461621/how-to-format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900-in-javascrip"
-		function shortenLargeNumber(num, digits) {
-		    var units = ['k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
-		        decimal;
 
-		    for(var i=units.length-1; i>=0; i--) {
-		        decimal = Math.pow(1000, i+1);
-
-		        if(num <= -decimal || num >= decimal) {
-		            return +(num / decimal).toFixed(digits) + units[i];
-		        }
-		    }
-
-		    return num;
-		}
-
-		randomizeStats = function(){
-			document.querySelectorAll(".stats-text p").forEach(function(el){
-				var statsTextP = el;
-				var randNum = Math.floor(Math.random(1) * 2000);
-				statsTextP.dataset.engagementCounter = randNum;
-				statsTextP.textContent = String( shortenLargeNumber(randNum, 1) );
-			})
-		}
-
-		document.querySelectorAll(".bottom-block").forEach(function(el){
-			// Add event listeners to all the bottom blocks (ie, like, bookmark and comment)
-			el.addEventListener('click', function(){
-
-				// whenever we click we want to give feedback with a slight light gray blink
-				// that this area has been clicked and the action (like or bookmark) has
-				// been engaged
-				el.classList.add("bg-gray");
-				setTimeout(function(){
-					el.classList.remove("bg-gray");
-				}, 100);
-
-				// Then we change the colour of the icon to give a postive feedback
-				// also we adjust the stats number up or down by one.
-				var iconContainer = el.querySelector(".icon-container");
-				var statsTextP = el.querySelector(".stats-text p");
-				var currentCount = Number(statsTextP.dataset.engagementCounter);
-				var updatedCount;
-
-				if( !iconContainer.className.includes("engaged") ){
-					updatedCount = currentCount+1;
-					statsTextP.classList.add("green-highlight");
-				}else{
-					updatedCount = currentCount-1;
-					statsTextP.classList.remove("green-highlight");
-				}
-
-				statsTextP.dataset.engagementCounter = updatedCount;
-				statsTextP.textContent = String( shortenLargeNumber(updatedCount, 1) );
-				iconContainer.classList.toggle("engaged");
-				// console.log("clicked", updatedCount);
-			})
-		})
 	</script>
 </body>
 
