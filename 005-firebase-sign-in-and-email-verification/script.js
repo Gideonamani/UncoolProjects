@@ -84,7 +84,8 @@ function signInUserToFirebase(email, password){
           uid: userData.uid
         };
         ref.set(data).then(function(){
-            showProfilePage();
+            // showProfilePage();
+            window.location = "";
           })
           .catch(function(error) {
             // Handle error writing to the database
@@ -300,9 +301,11 @@ function getProfileData(){
   var settingsPg = document.querySelector("#profile-settings-page");
   settingsPg.querySelector("#profilename").value = currentUser.displayName;
   settingsPg.querySelector("#profilephotourl").value = currentUser.photoURL;
+  settingsPg.querySelector("#profileemail").value = currentUser.email;
 }
 
 function verifyEmail(){
+  showProfilePage();
   var user = firebase.auth().currentUser;
   user.sendEmailVerification().then(function() {
     // Email sent.
@@ -344,6 +347,25 @@ function updateProfileNameNPhoto(){
   });
 }
 
+function updateEmailNVerify(){
+  var user = firebase.auth().currentUser;
+  var currentEmail = user.email;
+  var inputEmail = document.querySelector("#profile-settings-page #profileemail").value;
+  if( currentEmail !== inputEmail ){
+    user.updateEmail(inputEmail).then(function() {
+        // Update successful.
+        getProfileData();
+        showProfilePage();
+        verifyEmail();
+        return;
+      }).catch(function(error) {
+        // An error happened.
+        document.querySelector(".error-div").hidden = false;
+        document.querySelector("#updateErrorMsg").textContent = "ERROR: " + error.message;
+        console.info("ERROR:", error.message);
+      });
+  }
+}
 
 
 // General Functions

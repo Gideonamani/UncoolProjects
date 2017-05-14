@@ -633,8 +633,11 @@ button.sign-out {
     font-weight: 600;	
 }
 .confirm-settings {
-    display: flex;
-    justify-content: flex-end;
+    text-align: right;
+}
+.confirm-settings  p {
+	text-align: left;
+    margin-bottom: 4px;
 }
 .confirm-settings button {
     padding: 4px 8px;
