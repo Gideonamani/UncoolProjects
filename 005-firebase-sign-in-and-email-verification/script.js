@@ -78,7 +78,7 @@ function signInUserToFirebase(email, password){
   firebase.auth().signInWithEmailAndPassword(email, password).
       then(function(userData){
         console.log("About to send the User Data to DB!");
-        var ref = firebase.database().ref("userData/"+userData.uid);
+        var ref = firebase.database().ref("userData/UncoolProjects/"+userData.uid);
         var data = {
           email: userData.email,
           emailVerified: userData.emailVerified,
@@ -278,10 +278,8 @@ function checkForUser(){
 // Profile Functions
 function getProfileData(){
   var currentUser = firebase.auth().currentUser;
-  // var ref = firebase.database().ref().child("userData").child(authUser.uid);
   var displayNameH2 = document.querySelector("#profile-display-name");
   var emailP = document.querySelector("#profile-email");
-  // ref.once("value").then( function(snap){
     // if  user hasn't set the username yet use the email.
     if(currentUser.displayName){
       displayNameH2.textContent = currentUser.displayName;
@@ -298,7 +296,6 @@ function getProfileData(){
     emailP.title = currentUser.email;
     emailP.textContent = currentUser.email;
     console.log(currentUser);
-  // });
 }
 
 function verifyEmail(){
