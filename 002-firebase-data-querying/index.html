@@ -88,6 +88,39 @@
 			padding: 20px;
 			border-radius: 4px;
 		}
+		.input-item {
+			margin: 8px 0;
+			border-bottom: solid #ddd 1px;
+			padding-bottom: 2px;
+		}
+		.input-item input, .input-item select {
+			box-sizing: border-box;
+			width: 100%;
+			border: solid #444 1px;
+			border-radius: 2px;
+			padding: 4px;
+			font-size: 1rem;
+		}
+		.input-item span {
+			display: inline-block;
+			width: 45%;
+		}
+		.input-item span input[type="checkbox"] {
+			width: auto;
+			margin-left: 8px;
+		}
+		button#run-query {
+			width: 80%;
+			max-width: 400px;
+			padding: 4px;
+			font-size: 1.1rem;
+			font-weight: 500;
+			background: linear-gradient(darkturquoise, #8af2ff);
+			border: solid turquoise 2px;
+			border-radius: 4px;
+			color: #4e4e4e;
+			text-transform: uppercase;		
+		}
 	</style>
 
 </head>
@@ -106,8 +139,36 @@
 			</h3>
 			<pre class="test-data">
 {
-	"juice": 44,
-	"mango": 55
+	"11": {
+			"firstName": "Blue",
+			"lastName": "Azure",
+			"age": "34",
+			"yearJoined": 20
+		},
+	"22": {
+			"firstName": "Eldo",
+			"lastName": "Jupiter",
+			"age": "9",
+			"yearJoined": 21
+		},
+	"33": {
+			"firstName": "Canny",
+			"lastName": "Zoo",
+			"age": "3",
+			"yearJoined": 19
+		},
+	"44": {
+			"firstName": "Antonio",
+			"lastName": "Kane",
+			"age": "6",
+			"yearJoined": 14
+		},
+	"55": {
+			"firstName": "Mustafi",
+			"lastName": "Joe",
+			"age": "66",
+			"yearJoined": 12
+		}
 }
 			</pre>
 		</div>
@@ -116,7 +177,59 @@
 
 		<!-- II) QUERY INPUTS -->
 		<div class="query-section">
+			<h3 class="query-headline">
+				Query Tweak Knobs
+			</h3>
+			<div class="input-item">
+				<label>
+					<p> Order Type </p>
+					<select>
+						<option value="volvo">Child</option>
+						<option value="saab">Key</option>
+						<option value="mercedes">Value</option>
+					</select>
+				</label>
+			</div>
 
+			<div class="input-item" id="child-options">
+				<label>
+					<p> Order by child options </p>
+					<select>
+						<option value="volvo">Age</option>
+						<option value="saab">First Name</option>
+						<option value="mercedes">Last Name</option>
+						<option value="mercedes">Year Joined</option>
+					</select>
+				</label>
+			</div>
+
+			<div class="input-item">
+				<label>
+					<p> Limit to the first </p>
+					<input type="number" name="" step="1" min="0" max="5">
+				</label>
+			</div>
+
+			<div class="input-item">
+					<p> Highlight Query </p>
+					<span>
+						<label>
+							Yes
+							<input type="checkbox" name="">
+						</label>
+					</span>
+					<span>
+						<label>
+							No
+							<input type="checkbox" name="">
+						</label>
+					</span>
+				</label>
+			</div>
+
+			<div class="input-item" style="text-align: center;">
+				<button id="run-query">Send</button>
+			</div>
 
 
 		</div>
