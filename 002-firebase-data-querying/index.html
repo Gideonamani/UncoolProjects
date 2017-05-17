@@ -424,9 +424,9 @@
 			var array2 = Object.keys(json).map(x => json[x]);
 			array.sort(function(a, b) {
 				if(!descending){
-				    return a[sortProperty] - b[sortProperty];
+					return (a[sortProperty] > b[sortProperty]) ? 1 : ((b[sortProperty] > a[sortProperty]) ? -1 : 0);
 				}else{
-					return b[sortProperty] - a[sortProperty];
+					return (b[sortProperty] > a[sortProperty]) ? 1 : ((a[sortProperty] > b[sortProperty]) ? -1 : 0);
 				}
 			});
 
