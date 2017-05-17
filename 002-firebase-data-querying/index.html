@@ -31,8 +31,7 @@
 			margin: 0;
 		}
 		p {
-			padding: 4px 8px;
-			font-size: 1.2rem;
+			font-size: 1.1rem;
 		}
 		p span {
 			padding: 0 2px;
@@ -73,8 +72,11 @@
 		.query-section {
 			border: solid #00BCD4 1px;
 			border-radius: 4px;
-			padding: 2px;
+			padding: 4px 8px;
 			margin: 8px 0;
+		}
+		.query-section#explanations p {
+			font-family: serif;
 		}
 		.query-headline {
 		    border-bottom: dotted gray 1px;
@@ -103,6 +105,13 @@
 			border-radius: 2px;
 			padding: 4px;
 			font-size: 1rem;
+		}
+		.input-item.disabled {
+			background: #e4e4e4;
+			color: grey;
+		}
+		.input-item.disabled select {
+			background: #e4e4e4;
 		}
 		.input-item span {
 			display: inline-block;
@@ -186,10 +195,10 @@
 			<div class="input-item">
 				<label>
 					<p> Order Type </p>
-					<select>
-						<option value="volvo">Child</option>
-						<option value="saab">Key</option>
-						<option value="mercedes">Value</option>
+					<select id="main-query-types">
+						<option value="child">Child</option>
+						<option value="key">Key</option>
+						<option value="value">Value</option>
 					</select>
 				</label>
 			</div>
@@ -197,7 +206,7 @@
 			<div class="input-item" id="child-options">
 				<label>
 					<p> Order by child options </p>
-					<select>
+					<select id="child-query-options">
 						<option value="volvo">Age</option>
 						<option value="saab">First Name</option>
 						<option value="mercedes">Last Name</option>
@@ -253,7 +262,7 @@
 
 		<!-- IV) QUERY EXPLANATON -->
 		<!-- some query order explanations -->
-		<div class="query-section">
+		<div class="query-section" id="explanations">
 			<h3 class="query-headline">
 				Short Explanation
 			</h3>
@@ -429,7 +438,23 @@
 			});
 		}
 
-		getFromDB("age");
+		
+
+		document.querySelector("select#main-query-types").addEventListener("change",
+			function(e){
+				var mainSelect = e.target;
+				var childOptionSelect = document.querySelector("#child-query-options");
+				var childOptionsInputItemDiv = childOptionSelect.closest("div.input-item");
+				if(mainSelect.value != "child"){
+					childOptionsInputItemDiv.classList.add("disabled");
+					childOptionSelect.disabled = true;
+				}else{
+					childOptionsInputItemDiv.classList.remove("disabled");
+					childOptionSelect.disabled = false;
+				}
+			})
+		// getFromDB("age");
+
 	</script>
 </body>
 </html>
