@@ -124,7 +124,7 @@
 			width: auto;
 			margin-left: 8px;
 		}
-		button#run-query {
+		button {
 			width: 80%;
 			max-width: 400px;
 			padding: 4px;
@@ -135,6 +135,14 @@
 			border-radius: 4px;
 			color: #4e4e4e;
 			text-transform: uppercase;		
+		}
+		button#run-query {
+			background: linear-gradient(darkturquoise, #8af2ff);
+			border: solid turquoise 2px;	
+		}
+		button#clear-results {
+			background: linear-gradient(#eee, lightgray);
+			border: solid #ddd 2px;	
 		}
 	</style>
 
@@ -154,36 +162,41 @@
 			</h3>
 			<pre class="test-data">
 {
-	"11": {
-			"firstName": "Blue",
-			"lastName": "Azure",
-			"age": "34",
-			"yearJoined": 20
-		},
-	"22": {
-			"firstName": "Eldo",
-			"lastName": "Jupiter",
-			"age": "9",
-			"yearJoined": 21
-		},
-	"33": {
-			"firstName": "Canny",
-			"lastName": "Zoo",
-			"age": "3",
-			"yearJoined": 19
-		},
-	"44": {
-			"firstName": "Antonio",
-			"lastName": "Kane",
-			"age": "6",
-			"yearJoined": 14
-		},
-	"55": {
-			"firstName": "Mustafi",
-			"lastName": "Joe",
-			"age": "66",
-			"yearJoined": 12
-		}
+
+ "11": {
+    "firstName": "Blue",
+	"lastName": "Azure",
+	"age": "34",
+	"yearJoined": 20
+  },
+
+  "22": {
+    "firstName": "Eldo",
+    "lastName": "Jupiter",
+    "age": "9",
+    "yearJoined": 21
+  },
+
+  "33": {
+    "firstName": "Canny",
+    "lastName": "Zoo",
+    "age": "3",
+    "yearJoined": 19
+  },
+
+  "44": {
+    "firstName": "Antonio",
+    "lastName": "Kane",
+    "age": "6",
+    "yearJoined": 14
+  },
+
+  "55": {
+    "firstName": "Mustafi",
+    "lastName": "Joe",
+    "age": "66",
+    "yearJoined": 12
+  }
 }
 			</pre>
 		</div>
@@ -268,7 +281,10 @@
 		<!-- III) QUERY RESULTS -->
 		<!-- query data -->
 		<div id="query-results">
-			
+
+			<div class="input-item" style="text-align: center;">
+				<button id="clear-results" onclick="clearResults()" hidden> Clear Results </button>
+			</div>
 		</div>
 
 
@@ -391,25 +407,8 @@
 			}
 		}
 
-		// function displayJSON(json){
-		// 	var containerDiv = document.querySelector(".container");
-		// 	for (var key in json) {
-		// 		if(json.hasOwnProperty(key)){
-		// 			var cardDiv = document.createElement("DIV");
-		// 			cardDiv.classList.add("card");
-		// 			var htmlText = `
-		// 					<p><span class="first-name"> ${json[key].firstName} </span> <span class="last-name"> ${json[key].lastName}</span> </p>
-		// 					<div class="footnote">
-		// 						<p>Age: <span class="age-number">${json[key].age}</span></p>
-		// 						<p>Joined: '<span class="year-joined">${json[key].yearJoined}</span></p>
-		// 					</div>` ;
-		// 			cardDiv.innerHTML = htmlText;
-		// 			containerDiv.append(cardDiv);
-		// 		}
-		// 	}
-		// }
 
-		function displaySortedJSON(json, sortProperty, descending){
+		function displaySortedJSON(json, sortProperty, highlight, descending){
 			var queryResultsDiv = document.querySelector("#query-results");
 			var querySectionDiv = document.createElement("DIV");
 			querySectionDiv.classList.add("query-section");
@@ -421,7 +420,6 @@
 
 			var array = Object.keys(json).map(x => json[x]);
 
-			var array2 = Object.keys(json).map(x => json[x]);
 			array.sort(function(a, b) {
 				if(!descending){
 					return (a[sortProperty] > b[sortProperty]) ? 1 : ((b[sortProperty] > a[sortProperty]) ? -1 : 0);
@@ -446,7 +444,9 @@
 				querySectionDiv.append(cardDiv);				
 			});
 
-			queryResultsDiv.append(querySectionDiv);
+			queryResultsDiv.prepend(querySectionDiv);
+			document.querySelector("#clear-results").hidden = false;
+			highlightQuery(highlight, sortProperty, querySectionDiv);
 		}
 
 		document.querySelector("select#main-query-types").addEventListener("change",
@@ -495,7 +495,7 @@
 		}
 
 
-		function queryByChild(childToOrder, limitNumber){
+		function queryByChild(childToOrder, limitNumber, highlight){
 			var ref;
 			if(!limitNumber || Number(limitNumber) < 0){
 				ref = firebase.database().ref('queryTest').orderByChild(childToOrder);
@@ -503,7 +503,7 @@
 				ref = firebase.database().ref('queryTest').orderByChild(childToOrder).limitToFirst(Number(limitNumber));
 			}
 			ref.on('value', function(snap){
-				displaySortedJSON( snap.val(), childToOrder );
+				displaySortedJSON( snap.val(), childToOrder, highlight );
 			});
 		}
 
@@ -533,9 +533,28 @@
 			});
 		}
 
+		function highlightQuery(highlight, childToOrder, querySectionDiv){
+			//make sure you select the correct div; TODOOOOOOOOOOOOOOOOOOOO
+			if (highlight == "yes") {
+				var keyClassMap = {
+					"age": "age-number",
+					"lastName": "last-name",
+					"firstName": "first-name",
+					"yearJoined": "year-joined"
+				};
+				var spansToBeHighlighted = querySectionDiv.querySelectorAll("."+keyClassMap[childToOrder]);
+				spansToBeHighlighted.forEach(function(el){
+					el.classList.add("query-highlight");
+				});
+			}
+		}
 
-		// queryByChild("age");
-		// runQuery();
+
+		function clearResults(){
+			var els = document.querySelector("#query-results").querySelectorAll(".query-section");
+			els.forEach(function(el){el.remove();});
+			document.querySelector("#clear-results").hidden = true;
+		}
 
 
 	</script>
