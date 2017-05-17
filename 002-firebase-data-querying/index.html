@@ -119,7 +119,8 @@
 			display: inline-block;
 			width: 45%;
 		}
-		.input-item span input[type="checkbox"] {
+		.input-item span input[type="checkbox"], 
+		.input-item span input[type="radio"] {
 			width: auto;
 			margin-left: 8px;
 		}
@@ -209,10 +210,10 @@
 				<label>
 					<p> Order-by-child options </p>
 					<select id="child-query-options">
-						<option value="volvo">Age</option>
-						<option value="saab">First Name</option>
-						<option value="mercedes">Last Name</option>
-						<option value="mercedes">Year Joined</option>
+						<option value="age">Age</option>
+						<option value="firstName">First Name</option>
+						<option value="lastName">Last Name</option>
+						<option value="yearJoined">Year Joined</option>
 					</select>
 				</label>
 			</div>
@@ -220,7 +221,7 @@
 			<div class="input-item" id="specify-node" hidden>
 				<label>
 					<p> Specify Node </p>
-					<select id="child-query-options">
+					<select id="specify-node-options">
 						<option value="root"> Root Node </option>
 						<option value="11"> 11 </option>
 						<option value="22"> 22 </option>
@@ -234,7 +235,7 @@
 			<div class="input-item">
 				<label>
 					<p> Limit to the first </p>
-					<input type="number" name="" step="1" min="0" max="5">
+					<input type="number" name="" step="1" min="0" max="5" id="limit-input">
 				</label>
 			</div>
 
@@ -243,20 +244,20 @@
 					<span>
 						<label>
 							Yes
-							<input type="checkbox" name="">
+							<input type="radio" name="highlight" value="yes" checked>
 						</label>
 					</span>
 					<span>
 						<label>
 							No
-							<input type="checkbox" name="">
+							<input type="radio" name="highlight" value="no">
 						</label>
 					</span>
-				</label>
+
 			</div>
 
 			<div class="input-item" style="text-align: center;">
-				<button id="run-query">Send</button>
+				<button id="run-query" onclick="runQuery()">Send</button>
 			</div>
 
 
@@ -390,23 +391,23 @@
 			}
 		}
 
-		function displayJSON(json){
-			var containerDiv = document.querySelector(".container");
-			for (var key in json) {
-				if(json.hasOwnProperty(key)){
-					var cardDiv = document.createElement("DIV");
-					cardDiv.classList.add("card");
-					var htmlText = `
-							<p><span class="first-name"> ${json[key].firstName} </span> <span class="last-name"> ${json[key].lastName}</span> </p>
-							<div class="footnote">
-								<p>Age: <span class="age-number">${json[key].age}</span></p>
-								<p>Joined: '<span class="year-joined">${json[key].yearJoined}</span></p>
-							</div>` ;
-					cardDiv.innerHTML = htmlText;
-					containerDiv.append(cardDiv);
-				}
-			}
-		}
+		// function displayJSON(json){
+		// 	var containerDiv = document.querySelector(".container");
+		// 	for (var key in json) {
+		// 		if(json.hasOwnProperty(key)){
+		// 			var cardDiv = document.createElement("DIV");
+		// 			cardDiv.classList.add("card");
+		// 			var htmlText = `
+		// 					<p><span class="first-name"> ${json[key].firstName} </span> <span class="last-name"> ${json[key].lastName}</span> </p>
+		// 					<div class="footnote">
+		// 						<p>Age: <span class="age-number">${json[key].age}</span></p>
+		// 						<p>Joined: '<span class="year-joined">${json[key].yearJoined}</span></p>
+		// 					</div>` ;
+		// 			cardDiv.innerHTML = htmlText;
+		// 			containerDiv.append(cardDiv);
+		// 		}
+		// 	}
+		// }
 
 		function displaySortedJSON(json, sortProperty, descending){
 			var queryResultsDiv = document.querySelector("#query-results");
@@ -419,6 +420,8 @@
 			querySectionDiv.append(queryHeadline);
 
 			var array = Object.keys(json).map(x => json[x]);
+
+			var array2 = Object.keys(json).map(x => json[x]);
 			array.sort(function(a, b) {
 				if(!descending){
 				    return a[sortProperty] - b[sortProperty];
@@ -446,15 +449,6 @@
 			queryResultsDiv.append(querySectionDiv);
 		}
 
-
-		function getFromDB(childToOrder){
-			var ref = firebase.database().ref('queryTest').orderByChild(childToOrder);
-			ref.on('value', function(snap){
-				displaySortedJSON( snap.val(), childToOrder );
-			});
-		}
-	
-
 		document.querySelector("select#main-query-types").addEventListener("change",
 			function(e){
 				var mainSelect = e.target;
@@ -469,8 +463,79 @@
 					specifyNodeDiv.hidden = true;
 				}
 			})
-		// getFromDB("age");
 
+		function runQuery (){
+			//Print out the query params
+			var orderType = document.querySelector("#main-query-types").value;
+			var limitFirst = document.querySelector("#limit-input").value;
+			var highlight = document.querySelector("input[name='highlight']:checked").value;
+			var childOrder = document.querySelector("#child-query-options").value;
+			var node = document.querySelector("#specify-node-options").value;
+
+			switch(orderType){
+				case 'child':
+					queryByChild(childOrder, limitFirst, highlight);
+					break;
+				case 'key':
+					queryByKey(node, limitFirst, highlight);
+					break;
+				case 'value':
+					queryByValue(node, limitFirst, highlight);
+					break;
+			}
+
+			var queryData = {
+				orderType: orderType,
+				limitFirst: limitFirst,
+				highlight: highlight,
+				childOrder: childOrder,
+				node: node,
+			}
+			console.log("Query Data is:", queryData);
+		}
+
+
+		function queryByChild(childToOrder, limitNumber){
+			var ref;
+			if(!limitNumber || Number(limitNumber) < 0){
+				ref = firebase.database().ref('queryTest').orderByChild(childToOrder);
+			}else {
+				ref = firebase.database().ref('queryTest').orderByChild(childToOrder).limitToFirst(Number(limitNumber));
+			}
+			ref.on('value', function(snap){
+				displaySortedJSON( snap.val(), childToOrder );
+			});
+		}
+
+
+		function queryByKey(path, limitNumber){
+			var ref;
+			if(!limitNumber || Number(limitNumber) < 0 || path == "root"){
+				ref = firebase.database().ref('queryTest').orderByKey();
+			}else {
+				ref = firebase.database().ref('queryTest').child(path).orderByKey().limitToFirst(Number(limitNumber));
+			}
+			ref.on('value', function(snap){
+				console.log( snap.val() );
+			});
+		}
+
+
+		function queryByValue(path, limitNumber){
+			var ref;
+			if(!limitNumber || Number(limitNumber) < 0 || path == "root"){
+				ref = firebase.database().ref('queryTest').orderByValue();
+			}else {
+				ref = firebase.database().ref('queryTest').child(path).orderByValue().limitToFirst(Number(limitNumber));
+			}
+			ref.on('value', function(snap){
+				console.log( snap.val() );
+			});
+		}
+
+
+		// queryByChild("age");
+		// runQuery();
 
 
 	</script>
