@@ -24,6 +24,7 @@
 	<style type="text/css">
 		body {
 			font-family: sans-serif;
+			color: #222222;
 		}
 		h1, h2, h3, h4, h5, h6, p {
 			padding: 0;
@@ -107,11 +108,12 @@
 			font-size: 1rem;
 		}
 		.input-item.disabled {
-			background: #e4e4e4;
+			background: #f1f1f1;
 			color: grey;
+			border-radius: 4px;
 		}
 		.input-item.disabled select {
-			background: #e4e4e4;
+			background: #f0f0f0;
 		}
 		.input-item span {
 			display: inline-block;
@@ -205,12 +207,26 @@
 
 			<div class="input-item" id="child-options">
 				<label>
-					<p> Order by child options </p>
+					<p> Order-by-child options </p>
 					<select id="child-query-options">
 						<option value="volvo">Age</option>
 						<option value="saab">First Name</option>
 						<option value="mercedes">Last Name</option>
 						<option value="mercedes">Year Joined</option>
+					</select>
+				</label>
+			</div>
+
+			<div class="input-item" id="specify-node" hidden>
+				<label>
+					<p> Specify Node </p>
+					<select id="child-query-options">
+						<option value="root"> Root Node </option>
+						<option value="11"> 11 </option>
+						<option value="22"> 22 </option>
+						<option value="33"> 33 </option>
+						<option value="44"> 44 </option>
+						<option value="55"> 55 </option>
 					</select>
 				</label>
 			</div>
@@ -437,23 +453,25 @@
 				displaySortedJSON( snap.val(), childToOrder );
 			});
 		}
-
-		
+	
 
 		document.querySelector("select#main-query-types").addEventListener("change",
 			function(e){
 				var mainSelect = e.target;
 				var childOptionSelect = document.querySelector("#child-query-options");
-				var childOptionsInputItemDiv = childOptionSelect.closest("div.input-item");
+				var childOptionsDiv =  document.querySelector("#child-options");
+				var specifyNodeDiv = document.querySelector("#specify-node");
 				if(mainSelect.value != "child"){
-					childOptionsInputItemDiv.classList.add("disabled");
-					childOptionSelect.disabled = true;
+					childOptionsDiv.hidden = true;
+					specifyNodeDiv.hidden = false;
 				}else{
-					childOptionsInputItemDiv.classList.remove("disabled");
-					childOptionSelect.disabled = false;
+					childOptionsDiv.hidden = false;
+					specifyNodeDiv.hidden = true;
 				}
 			})
 		// getFromDB("age");
+
+
 
 	</script>
 </body>
