@@ -33,6 +33,8 @@
 		}
 		p {
 			font-size: 1.1rem;
+			text-overflow: ellipsis;
+			overflow-x: hidden;			
 		}
 		p span {
 			padding: 0 2px;
@@ -248,7 +250,7 @@
 			<div class="input-item">
 				<label>
 					<p> Limit to the first </p>
-					<input type="number" name="" step="1" min="0" max="5" id="limit-input">
+					<input type="number" name="" step="1" min="1" max="5" id="limit-input">
 				</label>
 			</div>
 
@@ -280,14 +282,16 @@
 
 		<!-- III) QUERY RESULTS -->
 		<!-- query data -->
-		<div id="query-results">
+		<div id="query-results" class="results">
 
 			<div class="input-item" style="text-align: center;">
 				<button id="clear-results" onclick="clearResults()" hidden> Clear Results </button>
 			</div>
 		</div>
 
+		<div id="query-results-raw" class="results">
 
+		</div>
 
 		<!-- query function code -->
 
@@ -317,51 +321,6 @@
 	<script type="text/javascript">
 		// starting script for Firebase docs https://firebase.google.com/docs/database/security/indexing-data,
 		// https://firebase.google.com/docs/database/web/lists-of-data
-		// var myUserId = firebase.auth().currentUser.uid;
-		// var topUserPostsRef = firebase.database().ref('user-posts/' + myUserId).orderByChild('starCount');
-		var d_ref = firebase.database().ref('deadlines').orderByChild('deadlineDate').limitToFirst(1);
-		d_ref.once('value').then(snap => console.log( snap.val() ) );
-		// d_ref.once('value', snap => console.log( snap.val() ) );
-
-
-		// var c_ref = firebase.database().ref('deadlines').orderByChild('criticalLevel').limitToFirst(1);
-		// c_ref.once('value').then(snap => console.log( "lowest CL:", snap.val() ) );
-
-		// var c_ref = firebase.database().ref('deadlines').orderByChild('criticalLevel');
-		// c_ref.once('value').then(snap => printJSON( snap.val() ) );
-
-		// var obk_ref = firebase.database().ref('deadlines/787878').orderByKey().limitToFirst(1);
-		// obk_ref.once('value').then(snap => console.log( "lowest key:", snap.val() ) );
-
-		// var obv_ref = firebase.database().ref('deadlines/787878').orderByValue().limitToFirst(1);
-		// obv_ref.once('value').then(snap => console.log( "lowest value:", snap.val() ) );
-
-// Lexicographical: Mind that strings are treated differently to numbers,
-// "80000" < 3
-// Also be careful of nulls, try to ensure that they are non-existant since 
-// nodes with null will rank lower to any other node with some data
-		// var json = {
-		// 	"787878": {
-		// 		"deadlineDate": "999999",
-		// 		"postDate": "780000",
-		// 		"criticalLevel": "2"
-		// 	},
-		// 	"667878": {
-		// 		"deadlineDate": "881818",
-		// 		"postDate": "660000",
-		// 		"criticalLevel": "1"
-		// 	},
-		// 	"447878": {
-		// 		"deadlineDate": "772233",
-		// 		"postDate": "440000",
-		// 		"criticalLevel": "2"
-		// 	},
-		// 	"227878": {
-		// 		"deadlineDate": "998888",
-		// 		"postDate": "220000",
-		// 		"criticalLevel": "3"
-		// 	},
-		// }
 
 		var json = {
 			"11": {
@@ -408,6 +367,10 @@
 		}
 
 
+		function sortFunction(a,b){
+			return (a[sortProperty] > b[sortProperty]) ? 1 : ((b[sortProperty] > a[sortProperty]) ? -1 : 0);
+		}
+
 		function displaySortedJSON(json, sortProperty, highlight, descending){
 			var queryResultsDiv = document.querySelector("#query-results");
 			var querySectionDiv = document.createElement("DIV");
@@ -415,19 +378,18 @@
 
 			var queryHeadline = document.createElement("H3");
 			queryHeadline.classList.add("query-headline");
-			queryHeadline.textContent = "Query sorted by: " + sortProperty;
+			queryHeadline.textContent = "Query sorted by: Child property - " + sortProperty;
 			querySectionDiv.append(queryHeadline);
 
 			var array = Object.keys(json).map(x => json[x]);
 
-			array.sort(function(a, b) {
+			array.sort(function(a,b){
 				if(!descending){
 					return (a[sortProperty] > b[sortProperty]) ? 1 : ((b[sortProperty] > a[sortProperty]) ? -1 : 0);
 				}else{
 					return (b[sortProperty] > a[sortProperty]) ? 1 : ((a[sortProperty] > b[sortProperty]) ? -1 : 0);
 				}
 			});
-
 
 			console.log(array);
 			array.forEach(function(objectItem){
@@ -447,6 +409,77 @@
 			queryResultsDiv.prepend(querySectionDiv);
 			document.querySelector("#clear-results").hidden = false;
 			highlightQuery(highlight, sortProperty, querySectionDiv);
+		}
+
+		function displaySortedKeyVal(obj, sortProperty, highlight, descending){
+			var queryResultsDiv = document.querySelector("#query-results");
+			var querySectionDiv = document.createElement("DIV");
+			querySectionDiv.classList.add("query-section");
+
+			var queryHeadline = document.createElement("H3");
+			queryHeadline.classList.add("query-headline");
+			queryHeadline.textContent = "Query sorted by: " + sortProperty;
+			querySectionDiv.append(queryHeadline);
+
+			if( sortProperty == "key" ){
+				var keyValArray = Object.keys(obj).map(function(x){
+					var o = {};
+					o[x] = obj[x];
+					return o;
+				});
+
+				keyValArray.sort(function(a,b){
+					if(!descending){
+						return (a > b) ? 1 : ((b > a) ? -1 : 0);
+					}else{
+						return (b > a) ? 1 : ((a > b) ? -1 : 0);
+					}
+				});
+
+				//for each item in the array
+				// display a key: val pair
+
+				keyValArray.forEach(function(obj){
+					var cardDiv = document.createElement("DIV");
+					cardDiv.classList.add("card");
+					var objKey = Object.keys(obj)[0];
+					var objVal = obj[objKey];
+					var htmlText = `<p><span class="key"> ${objKey} </span> :
+					<span class="val"> ${JSON.stringify(objVal)}</span> </p>`
+					cardDiv.innerHTML = htmlText;
+					querySectionDiv.append(cardDiv);
+				});
+			}else if (sortProperty == "value" ){
+				var keyValArray = Object.keys(obj).map(function(x){
+					var o = {};
+					o[JSON.stringify(obj[x])] = x;
+					return o;
+				});
+
+				keyValArray.sort(function(a,b){
+					if(!descending){
+						return (a > b) ? 1 : ((b > a) ? -1 : 0);
+					}else{
+						return (b > a) ? 1 : ((a > b) ? -1 : 0);
+					}
+				});
+
+				// Remember that the key value pairs in the array have been flipped
+				keyValArray.forEach(function(obj){
+					var cardDiv = document.createElement("DIV");
+					cardDiv.classList.add("card");
+					var objVal = Object.keys(obj)[0];
+					var objKey = obj[objVal];
+					var htmlText = `<p><span class="val"> ${objKey} </span> :
+					<span class="key"> ${JSON.stringify(objVal)}</span> </p>`
+					cardDiv.innerHTML = htmlText;
+					querySectionDiv.append(cardDiv);
+				});
+			}
+
+			queryResultsDiv.prepend(querySectionDiv);
+			document.querySelector("#clear-results").hidden = false;
+			highlightQuery(highlight, "key", querySectionDiv);
 		}
 
 		document.querySelector("select#main-query-types").addEventListener("change",
@@ -503,46 +536,57 @@
 				ref = firebase.database().ref('queryTest').orderByChild(childToOrder).limitToFirst(Number(limitNumber));
 			}
 			ref.on('value', function(snap){
+				console.log(snap.val());
+				printRawQueryResults(snap.val());
 				displaySortedJSON( snap.val(), childToOrder, highlight );
 			});
 		}
 
 
-		function queryByKey(path, limitNumber){
+		function queryByKey(path, limitNumber, highlight){
 			var ref;
-			if(!limitNumber || Number(limitNumber) < 0 || path == "root"){
-				ref = firebase.database().ref('queryTest').orderByKey();
+			var limitNumber = limitNumber || "5"
+			if(Number(limitNumber) < 0 || path == "root"){
+				ref = firebase.database().ref('queryTest').orderByKey().limitToFirst(Number(limitNumber));
 			}else {
 				ref = firebase.database().ref('queryTest').child(path).orderByKey().limitToFirst(Number(limitNumber));
 			}
 			ref.on('value', function(snap){
-				console.log( snap.val() );
+				var o = snap.val();
+				printRawQueryResults(o);
+				displaySortedKeyVal(o, "key", highlight);
+				console.log( o );
 			});
 		}
 
 
-		function queryByValue(path, limitNumber){
+		function queryByValue(path, limitNumber, highlight){
 			var ref;
-			if(!limitNumber || Number(limitNumber) < 0 || path == "root"){
-				ref = firebase.database().ref('queryTest').orderByValue();
+			var limitNumber = limitNumber || "5"
+			if(Number(limitNumber) < 0 || path == "root"){
+				ref = firebase.database().ref('queryTest').orderByValue().limitToFirst(Number(limitNumber));
 			}else {
 				ref = firebase.database().ref('queryTest').child(path).orderByValue().limitToFirst(Number(limitNumber));
 			}
 			ref.on('value', function(snap){
-				console.log( snap.val() );
+				var o = snap.val();
+				printRawQueryResults(o);
+				displaySortedKeyVal(o, "value", highlight);
+				console.log( o );
 			});
 		}
 
-		function highlightQuery(highlight, childToOrder, querySectionDiv){
-			//make sure you select the correct div; TODOOOOOOOOOOOOOOOOOOOO
+		function highlightQuery(highlight, propertyToOrder, querySectionDiv){
 			if (highlight == "yes") {
 				var keyClassMap = {
 					"age": "age-number",
 					"lastName": "last-name",
 					"firstName": "first-name",
-					"yearJoined": "year-joined"
+					"yearJoined": "year-joined",
+					"key": "key",
+					"value": "value"
 				};
-				var spansToBeHighlighted = querySectionDiv.querySelectorAll("."+keyClassMap[childToOrder]);
+				var spansToBeHighlighted = querySectionDiv.querySelectorAll("."+keyClassMap[propertyToOrder]);
 				spansToBeHighlighted.forEach(function(el){
 					el.classList.add("query-highlight");
 				});
@@ -550,8 +594,29 @@
 		}
 
 
+
+		function qSectionHML(headline, moreHTMLText){
+			return `
+				<h3 class="query-headline">
+					${headline}
+				</h3>
+				${moreHTMLText}
+			`
+		}
+
+		function printQueryCode(){
+
+		}
+
+		function printRawQueryResults(data){
+			var div = document.createElement("DIV");
+			div.classList.add("query-section");
+			div.innerHTML = qSectionHML("Raw Query Results", JSON.stringify(data));
+			document.querySelector("#query-results-raw").append(div);
+		}
+
 		function clearResults(){
-			var els = document.querySelector("#query-results").querySelectorAll(".query-section");
+			var els = document.querySelectorAll(".results .query-section");
 			els.forEach(function(el){el.remove();});
 			document.querySelector("#clear-results").hidden = true;
 		}
