@@ -313,7 +313,7 @@
 		</div>
 
 		<!-- query function code -->
-		<div class="query-section" id="function-code">
+		<div class="query-section" id="function-code" hidden>
 			<h3 class="query-headline">
 				Generated Function Code.
 			</h3>
@@ -658,6 +658,7 @@
 			var refIntitText = "var ref = firebase.database()";
 			var refText =  "ref(path)"+ childPathText + "." + orderby + "("+ childText+")" + limitFirstText;
 			document.querySelector("#main-ref").textContent = refIntitText+refText;
+			document.querySelector("#function-code").hidden = false;
 		}
 
 		function printRawQueryResults(data){
