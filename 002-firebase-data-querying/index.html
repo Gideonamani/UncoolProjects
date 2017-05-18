@@ -41,6 +41,13 @@
 		    background: azure;	
 	        margin: 0 4px;		
 		}
+		span.block {
+			display: block;
+			width: 100%;
+		}
+		span.indent-1 {
+			padding-left: 16px;
+		}
 		header h2 {
 			border-bottom: solid lightgray 1px;
 			margin-bottom: 8px;
@@ -145,6 +152,18 @@
 		button#clear-results {
 			background: linear-gradient(#eee, lightgray);
 			border: solid #ddd 2px;	
+		}
+		.query-section#function-code {
+			background: #BDBDBD;
+		}
+		.query-section#function-code p{
+			background: #757575;
+			color: #FFEB3B;
+			padding: 8px 0;
+			border-radius: 2px;
+		}
+		.query-section#function-code p span{
+			background: #757575;
 		}
 	</style>
 
@@ -294,6 +313,17 @@
 		</div>
 
 		<!-- query function code -->
+		<div class="query-section" id="function-code">
+			<h3 class="query-headline">
+				Generated Function Code.
+			</h3>
+			<p>
+				<span class="block" id="main-ref"> var ref = firebase.database().ref(path).orderByKey();</span>
+				<span class="block"> ref.once("value", function(snap){ </span>
+				<span class="block indent-1">	console.log( snap.val() ); </span>
+				<span class="block">	}); </span>
+			</p>
+		</div>
 
 
 
@@ -391,7 +421,7 @@
 				}
 			});
 
-			console.log(array);
+			// console.log(array);
 			array.forEach(function(objectItem){
 				
 				var cardDiv = document.createElement("DIV");
@@ -524,7 +554,7 @@
 				childOrder: childOrder,
 				node: node,
 			}
-			console.log("Query Data is:", queryData);
+			// console.log("Query Data is:", queryData);
 		}
 
 
@@ -540,6 +570,7 @@
 				printRawQueryResults(snap.val());
 				displaySortedJSON( snap.val(), childToOrder, highlight );
 			});
+			printQueryCode("root", "orderByChild", limitNumber, childToOrder);
 		}
 
 
@@ -557,6 +588,7 @@
 				displaySortedKeyVal(o, "key", highlight);
 				console.log( o );
 			});
+			printQueryCode(path, "orderByKey", limitNumber);
 		}
 
 
@@ -574,6 +606,7 @@
 				displaySortedKeyVal(o, "value", highlight);
 				console.log( o );
 			});
+			printQueryCode(path, "orderByValue", limitNumber);
 		}
 
 		function highlightQuery(highlight, propertyToOrder, querySectionDiv){
@@ -604,8 +637,27 @@
 			`
 		}
 
-		function printQueryCode(){
+		function printQueryCode(path, orderby, limitFirst, child){
+			var childPathText;
+			var limitFirstText = "";
+			var childText = "";
+			if(limitFirst){
+				limitFirstText = ".limitToFirst("+limitFirst+")";
+			}
 
+			if(path == "root"){
+				childPathText = "";
+			}else {
+				childPathText = ".child('"+path+"')";
+			}
+
+			if(child){
+				childText = "'"+child+"'";
+			}
+
+			var refIntitText = "var ref = firebase.database()";
+			var refText =  "ref(path)"+ childPathText + "." + orderby + "("+ childText+")" + limitFirstText;
+			document.querySelector("#main-ref").textContent = refIntitText+refText;
 		}
 
 		function printRawQueryResults(data){
