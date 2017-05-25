@@ -29,6 +29,9 @@
 
 </head>
 <body>
+	<h2>
+		Welcome and Karibu. Tunamake stuff online :)
+	</h2>
 	<div id="recaptcha-container"></div>
 	<div id="firebaseui-auth-container">
 		
@@ -51,7 +54,8 @@
 		// Initialize the FirebaseUI Widget using Firebase.
 		var ui = new firebaseui.auth.AuthUI(firebase.auth());
 		// The start method will wait until the DOM is loaded.
-		ui.start('#firebaseui-auth-container', uiConfig);
+		
+		// ui.start('#firebaseui-auth-container', uiConfig);
 
 
 		// window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
@@ -63,7 +67,7 @@
 		// });
 
 
-		window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+		// window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
 	</script>
 </body>
 </html>
