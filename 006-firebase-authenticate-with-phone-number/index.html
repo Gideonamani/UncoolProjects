@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+	<title> Uncool Projects | Firebase Querying </title>
+		
+	<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+
+	<script src="https://cdn.firebase.com/libs/firebaseui/2.0.0/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.0.0/firebaseui.css" />
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyA9qbEIGZh8B9dpFCgeDk9kj3gD3kuYXkA",
+	    authDomain: "gideonamaniaudioproject01.firebaseapp.com",
+	    databaseURL: "https://gideonamaniaudioproject01.firebaseio.com",
+	    projectId: "gideonamaniaudioproject01",
+	    storageBucket: "gideonamaniaudioproject01.appspot.com",
+	    messagingSenderId: "282223454104"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+
+	<style type="text/css">
+	</style>
+
+</head>
+<body>
+	<div id="recaptcha-container">
+		<button>ReCaptcha Click</button>
+	</div>
+	<div id="firebaseui-auth-container">
+		
+	</div>
+
+	<script type="text/javascript">
+		// FirebaseUI config.
+		var uiConfig = {
+		signInSuccessUrl: '<url-to-redirect-to-on-success>',
+		signInOptions: [
+		  // Leave the lines as is for the providers you want to offer your users.
+		  firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+		  firebase.auth.EmailAuthProvider.PROVIDER_ID,
+		  firebase.auth.PhoneAuthProvider.PROVIDER_ID
+		],
+		// Terms of service url.
+		tosUrl: '<your-tos-url>'
+		};
+
+		// Initialize the FirebaseUI Widget using Firebase.
+		var ui = new firebaseui.auth.AuthUI(firebase.auth());
+		// The start method will wait until the DOM is loaded.
+		ui.start('#firebaseui-auth-container', uiConfig);
+
+
+		// window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
+		//   'size': 'invisible',
+		//   'callback': function(response) {
+		//     // reCAPTCHA solved, allow signInWithPhoneNumber.
+		//     onSignInSubmit();
+		//   }
+		// });
+
+
+		window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+	</script>
+</body>
+</html>
