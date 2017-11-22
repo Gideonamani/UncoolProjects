@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+	<title> Uncool Projects | Payment Request API </title>
+
+	<style type="text/css">
+	</style>
+
+</head>
+<body>
+	<div id="container">
+		<h2>Hello</h2>
+		<button id="start"></button>
+	</div>
+
+	<script type="text/javascript">
+	function onBuyClicked() {
+	  if (!window.PaymentRequest) {
+	    // PaymentRequest API is not available. Forwarding to
+	    // legacy form based experience.
+	    location.href = '/checkout';
+	    return;
+	  }
+
+	  // Supported payment methods
+	  var supportedInstruments = [{
+	      supportedMethods: ['basic-card'],
+	      data: {
+	        supportedNetworks: [
+	          'visa', 'mastercard', 'amex', 'discover',
+	          'diners', 'jcb', 'unionpay'
+	        ]
+	      }
+	  }];
+
+	  // Checkout details
+	  var details = {
+	    displayItems: [{
+	      label: 'Original donation amount',
+	      amount: { currency: 'USD', value: '65.00' }
+	    }, {
+	      label: 'Friends and family discount',
+	      amount: { currency: 'USD', value: '-10.00' }
+	    }],
+	    total: {
+	      label: 'Total due',
+	      amount: { currency: 'USD', value : '55.00' }
+	    }
+	  };
+
+	  // 1. Create a `PaymentRequest` instance
+	  var request = new PaymentRequest(supportedInstruments, details);
+
+	  // 2. Show the native UI with `.show()`
+	  request.show()
+	  // 3. Process the payment
+	  .then(result => {
+	    // POST the payment information to the server
+	    return fetch('/pay', {
+	      method: 'POST',
+	      credentials: 'include',
+	      headers: {
+	        'Content-Type': 'application/json'
+	      },
+	      body: JSON.stringify(result.toJSON())
+	    }).then(response => {
+	      // 4. Display payment results
+	      if (response.status === 200) {
+	        // Payment successful
+	        return result.complete('success');
+	      } else {
+	        // Payment failure
+	        return result.complete('fail');
+	      }
+	    }).catch(() => {
+	      return result.complete('fail');
+	    });
+	  });
+	}
+
+	document.querySelector('#start').addEventListener('click', onBuyClicked);
+
+
+	</script>
+</body>
+</html>
