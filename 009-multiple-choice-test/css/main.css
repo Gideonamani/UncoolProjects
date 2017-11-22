@@ -40,7 +40,8 @@ body {
 .image-wrapper {
 	text-align: center;
 }
-.image-wrapper {display: none;}
+
+.image-wrapper.no-image {display: none;}
 
 .container.home select,
 .container.home button {

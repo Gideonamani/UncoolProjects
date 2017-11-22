@@ -13,7 +13,7 @@ const qnData = 		{
 				},
 				{
 					"text": "Engine(s), Wings, Tail, Langing Gear, Fuselage",
-					"image": "../images/some-image.png"
+					"image": ""
 				},
 				{
 					"text": "Cockpit, Wings, Chairs, Rudder",
@@ -46,11 +46,13 @@ class Question {
 
 		const questionImg = this.node.querySelector(".question img");
 		questionImg.src = this.data.image;
+		if (this.data.image){ questionImg.src = this.data.image; }
+		else { this.node.querySelector(".question .image-wrapper").classList.add("no-image"); }
 
 		this.displayOptionsIn(this.node.querySelector("section.options"));
 		this.hasBeenDisplayed = true;
 
-		const containerDiv = document.querySelector(".container .question-wrapper");
+		const containerDiv = document.querySelector(".container .questions-wrapper");
 		const parent = parentNode ? parentNode : containerDiv;
 		parent.appendChild(this.node);
 	};
@@ -66,7 +68,11 @@ class Question {
 			const optionNode = tempOption.cloneNode(true);
 
 			optionNode.querySelector("p").textContent = optionData.text;
-			optionNode.querySelector("img").src = optionData.image;
+			if(optionData.image){
+				optionNode.querySelector("img").src = optionData.image;
+			}else{
+				optionNode.querySelector(".image-wrapper").classList.add("no-image");
+			}
 
 			const optionInput = optionNode.querySelector("input");
 			optionInput.name = this.data.text;
