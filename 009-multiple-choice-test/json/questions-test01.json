@@ -31,28 +31,28 @@
 		{	
 			"type": "single",
 			"text": "Capital City of Russia",
-			"image": "../images/plane-parts.png",
+			"image": "",
 			"options": [
 				{
 					"text": "Moscow",
-					"image": "../images/some-image.png"
+					"image": ""
 				},
 				{
 					"text": "St. Petersburg",
-					"image": "../images/some-image.png"
+					"image": "."
 				},
 				{
 					"text": "Kaliningrad",
-					"image": "../images/some-image.png"
+					"image": ""
 				},
 				{
 					"text": "Sochi",
-					"image": "../images/some-image.png"
+					"image": ""
 				}
 			],
 			"answers": [{
 					"text": "Moscow",
-					"image": "../images/some-image.png"
+					"image": ""
 				}]
 		}
 	]

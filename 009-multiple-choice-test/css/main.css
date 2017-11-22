@@ -11,7 +11,8 @@ body {
 	justify-content: center;*/
 }
 
-.container, .paginator-wrapper {
+.container, .paginator-wrapper,
+.full-report-wrapper footer {
 	/*width: 600px;*/
 	max-width: 600px;
 	margin: 0 auto;
@@ -166,7 +167,7 @@ img {
 
 /*.full-report-wrapper header,*/
 .full-report-wrapper footer {
-	margin: 4px;
+	margin: 4px auto;
 	text-align: right;
 }
 .full-report .question-wrapper {

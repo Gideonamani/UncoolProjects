@@ -4,7 +4,7 @@
 		{	
 			"type": "multiple",
 			"text": "What day of the week is Toady?",
-			"image": "../images/plane-parts.png",
+			"image": "../images/calendar.png",
 			"options": [
 				{
 					"text": "Monday",
