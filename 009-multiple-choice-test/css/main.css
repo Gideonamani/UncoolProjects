@@ -40,6 +40,10 @@ body {
 .image-wrapper {
 	text-align: center;
 }
+.image-wrapper img,
+img {
+  max-width: 100%;
+}
 
 .image-wrapper.no-image {display: none;}
 
