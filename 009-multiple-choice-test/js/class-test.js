@@ -73,8 +73,9 @@ class Test {
 		return (this.currentQuestionIndex > 0 );
 	};
 	display(){
-		for (var i = 0; i < this.testData.list.length; i++) {
-			const qnData = this.testData.list[i];
+		const shuffledQnList = shuffle(this.testData.list);
+		for (var i = 0; i < shuffledQnList.length; i++) {
+			const qnData = shuffledQnList[i];
 			this.questions.push(new Question(qnData));
 		}
 		this.currentQuestionIndex = 0;
@@ -110,7 +111,7 @@ class Test {
 		}
 		const total = this.questions.length;
 		const correctFraction = correctItems / total;
-		const percScore = correctFraction * 100;
+		const percScore = Math.ceil(correctFraction * 100);
 		console.log(percScore);
 		document.getElementById("test-score").textContent = percScore;
 		document.querySelector(".results-wrapper").classList.add("show");
@@ -143,6 +144,11 @@ class Test {
 			if(evaluatedQn.answeredCorrectly){
 				reportQnNode.querySelector(".question-evaluation-status").classList.add("correct");
 			}
+
+			// insert image if it exists
+			if(qnData.image){
+				reportQnNode.querySelector(".image-wrapper img").src =  qnData.image;
+			}else{ reportQnNode.querySelector(".image-wrapper").classList.add("no-image"); }
 
 			// insert the qn answers
 			const answersUL = reportQnNode.querySelector("ul.answers");
