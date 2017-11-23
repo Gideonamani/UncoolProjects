@@ -15,11 +15,3 @@ function hideLoading(){
 	// document.querySelector(".container").classList.add("show");
 	document.querySelector(".page-spinner").classList.remove("show");
 }
-
-if(navigator.serviceWorker){
-	navigator.serviceWorker.register('../sw.js').then(reg => {
-		console.log('sw ready to go.');
-	}).catch( err => {
-		console.log('sw registration error:', err);
-	});
-}
