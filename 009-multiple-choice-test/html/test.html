@@ -164,7 +164,7 @@
         const url_string = window.location.href; 
         const url = new URL(url_string);
         const jsonName = url.searchParams.get("json");
-        const jsonPath = "../json/questions-"+jsonName+".json";
+        const jsonPath = "../json/"+jsonName+".json";
 
         getJSON(jsonPath).then( json => {
         	console.log(jsonPath, "\n", "Data:", json );

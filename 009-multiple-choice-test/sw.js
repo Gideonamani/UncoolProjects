@@ -7,6 +7,7 @@ self.addEventListener('install', event => {
 		caches.open(mainCache).then(function(cache) {
 			cache.addAll([
 					"./",
+					"./manifest.json",
 					"./index.html",
 					"./js/index.js",
 					"./js/main.js",
@@ -14,7 +15,9 @@ self.addEventListener('install', event => {
 					"./images/icons/icon-size-72.png",
 					"./favicon.ico",
 					// "./json/*",
-					"./html/test.html"
+					"./html/test.html",
+					"./js/class-test.js",
+					"./js/class-question.js"
 				]);
 		})
 	);
@@ -31,7 +34,8 @@ self.addEventListener('activate', event => {
           // the whole origin
           const appCache = cacheName.startsWith("gideonamani-testor");
           const outOfDateCache = appCacheNames.indexOf(cacheName) < 0;
-          return (appCache && outOfDateCache);
+          const notTestCache = !cacheName.startsWith("gideonamani-testor-test-#");
+          return (appCache && outOfDateCache && notTestCache);
         }).map(function(cacheName) {
           return caches.delete(cacheName);
         })
@@ -49,24 +53,27 @@ self.addEventListener('fetch', event => {
 	event.respondWith(
 		// look in the cache
 		caches.open(mainCache).then( cache => {
-			function fetchFromNetwork (){				
-				return fetch(event.request).then( response => {
-					if(response.status == 404){
-						return new Response("Oops Daisey, file not found.");
-						// return fetch("404.html");
-					}
-					return response;
-				}).catch( () => {
-					return new Response("OFFLINE");
-				})
-			}
+		// if(event.request.url.includes("/images/structures/"))
 
-			return cache.match(event.request).then(retreivedResource => {
+			const urlPath = new URL(event.request.url).pathname;
+			return caches.match(urlPath).then(retreivedResource => {
 				if(retreivedResource) return retreivedResource;
 				// if we can't find the resource in the catch, fetch it from network
-				return fetchFromNetwork();
+				return fetchFromNetwork(event);
 			})
 		})
 	)
 
 });
+
+function fetchFromNetwork (event){
+	return fetch(event.request).then( response => {
+		if(response.status == 404){
+			return new Response("Oops Daisey, file not found.");
+			// return fetch("404.html");
+		}
+		return response;
+	}).catch( () => {
+		return new Response("OFFLINE");
+	})
+}
