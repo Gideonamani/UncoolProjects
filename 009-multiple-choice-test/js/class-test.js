@@ -65,6 +65,7 @@ class Test {
 		this.questions = [];
 		this.evaluation = [];
 		this.hasBeenEvaluated = false;
+		this.highlightUnanswered = false;
 	};
 	isThereNextQuestion(){
 		return (this.currentQuestionIndex < (this.testData.list.length - 1));
@@ -179,9 +180,23 @@ class Test {
 		if(oldIndex >= 0) this.questions[oldIndex].undisplay();
 		this.currentQuestion = this.questions[newIndex];
 		this.currentQuestion.display();
+		this.currentQuestion.node.querySelectorAll(".option input").forEach( (el, i, yo) => {
+			el.onchange = function(){this.calcCheckedQuestions();}.bind(this);
+		});
 		this.calcCheckedQuestions();
 		this.calcPageIndex()
 	};
+	reshowCurrentQuestion(){
+		this.currentQuestion.undisplay();
+		this.currentQuestion.display();
+	};
+	highlightUnansweredQns(yes){
+		this.highlightUnanswered = yes;
+		for (var i = 0; i < this.questions.length; i++) {
+			this.questions[i].highlightUnanswered = this.highlightUnanswered;
+		}
+		this.reshowCurrentQuestion();
+	}
 	showNextQuestion(){
 		// if no further questions hide the next button
 		this.currentQuestionIndex++;

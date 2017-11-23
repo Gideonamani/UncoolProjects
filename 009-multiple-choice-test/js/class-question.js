@@ -36,6 +36,7 @@ class Question {
 		this.checkedOptions = [];
 		this.evaluation = {};
 		this.hasBeenDisplayed = false;
+		this.highlightUnanswered = false;
 	};
 	display(parentNode){
 		const tempQn = document.querySelector(".templates .question-wrapper");
@@ -49,7 +50,14 @@ class Question {
 		if (this.data.image){ questionImg.src = this.data.image; }
 		else { this.node.querySelector(".question .image-wrapper").classList.add("no-image"); }
 
-		this.displayOptionsIn(this.node.querySelector("section.options"));
+		const optionsNode = this.node.querySelector("section.options");
+		if(this.highlightUnanswered && (this.checkedOptions.length == 0)){
+			optionsNode.classList.add("unanswered");
+		}else{
+			optionsNode.classList.remove("unanswered");
+		}
+
+		this.displayOptionsIn(optionsNode);
 		this.hasBeenDisplayed = true;
 
 		const containerDiv = document.querySelector(".container .questions-wrapper");
@@ -99,7 +107,6 @@ class Question {
 
 		if(this.isQnWithSingleAnswer && inputChecked){
 			this.checkedOptions[0] = optionIndex;
-			return;
 		}
 
 		// // if we're checking an input in a qn with multiple answers
@@ -113,6 +120,16 @@ class Question {
 			// remove the option from the checked array
 			const indexInChecked = this.checkedOptions.indexOf(optionIndex);
 			this.checkedOptions.splice(indexInChecked, 1);
+		}
+
+		// highlighting and unhighlighting when option inputs are clicked
+		// if checkedOptions empty and the highlight flag is on add unanswered class
+		// else if checkedOptions is not empty, then remove unanswered class
+		if(!this.highlightUnanswered) return;
+		if(this.checkedOptions.length === 0 ) {
+			this.node.querySelector("section.options").classList.add("unanswered");
+		}else {
+			this.node.querySelector("section.options").classList.remove("unanswered");
 		}
 	};
 	evaluate(){

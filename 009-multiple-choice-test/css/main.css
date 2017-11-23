@@ -52,6 +52,16 @@ img {
 .container.home button {
   font-size: 1.1rem;
   padding: 4px;
+  width: 80%;
+}
+
+/*HIGHLIGHTING UNASWERED QUESTIONS*/
+section.options.unanswered {
+  border: solid 4px gold;
+}
+
+.answered section.options.unanswered {
+  border: none;
 }
 
 .option {

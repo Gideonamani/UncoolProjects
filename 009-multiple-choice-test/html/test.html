@@ -44,9 +44,18 @@
 			<button id="next-question">NEXT</button>
 		</div>
 		<div class="confirm-evaluation">
-			<p>Not all questions are answered. Are you sure you want to proceed with evaluation?</p>
-			<button id="cancel-submition">CANCEL</button>
-			<button id="confirm-submition">EVALUATE</button>
+			<div>
+				<p>Not all questions are answered. Are you sure you want to proceed with evaluation?</p>
+				<button id="cancel-submition">CANCEL</button>
+				<button id="confirm-submition">EVALUATE</button>
+			</div>
+
+			<div>
+				<label>
+					<p>Highlight options on unanswered question?</p>
+					<input id="highlight-unanswered" type="checkbox" name="">
+				</label>
+			</div>
 		</div>
 	</div>
 
@@ -184,6 +193,10 @@
 					document.querySelector(".paginator-wrapper").classList.add("show-evaluation-confirmation");
 				}
 			});
+
+			document.getElementById("highlight-unanswered").addEventListener("change", 
+				e => testApp.highlightUnansweredQns(e.target.checked));
+
 			document.getElementById("confirm-submition").addEventListener("click", e => {
 				// if the user still wants to proceed, evalute
 				testApp.showResults();
