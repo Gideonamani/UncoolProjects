@@ -170,7 +170,7 @@
         	console.log(jsonPath, "\n", "Data:", json );
         	initTestApp(json);
 			hideLoading();
-        }).catch( err => show404() );
+        }).catch( err => show404(err) );
 
         function initTestApp (testJSON){
 			const testApp = new Test(testJSON);
@@ -212,8 +212,9 @@
 			});
         }
 
-        function show404(){
-        	window.location.href = "../404.html";
+        function show404(err){
+        	console.log(err);
+        	window.location.href = err.url;
         }
 
 

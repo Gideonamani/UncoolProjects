@@ -2,7 +2,13 @@ console.log("ready");
 
 function getJSON (jsonPath){
 	return fetch(jsonPath)
-	.then( res => res.json() )
+	.then( res => {
+		if(res.url.endsWith(".html")) {
+			throw({code: "badJSON", message: "Couldn't locate required resource.", url: res.url});
+		}else {
+			return res.json() 
+		}
+	})
 }
 
 
