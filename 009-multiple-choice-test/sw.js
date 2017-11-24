@@ -9,6 +9,8 @@ self.addEventListener('install', event => {
 					"./",
 					"./manifest.json",
 					"./index.html",
+					"./404.html",
+					"./offline.html",
 					"./js/index.js",
 					"./js/main.js",
 					"./css/main.css",
@@ -69,11 +71,18 @@ self.addEventListener('fetch', event => {
 function fetchFromNetwork (event){
 	return fetch(event.request).then( response => {
 		if(response.status == 404){
-			return new Response("Oops Daisey, file not found.");
-			// return fetch("404.html");
+			// return new Response("Oops Daisey, file not found.");
+			console.log("404 - fetchFromNetwork");
+			return fetch("./404.html");
 		}
 		return response;
 	}).catch( () => {
-		return new Response("OFFLINE");
+		// return new Response("OFFLINE");
+		console.log("Offline - fetchFromNetwork");
+		// when we are offline and the request doesn't exist in cache
+		// we show the offline page.
+		// there is no catch statement for offline since if get an error
+		// that means the user is offline and doesn't have any cached pages
+		return caches.match("./offline.html").then(offlinePage => offlinePage);
 	})
 }
