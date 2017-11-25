@@ -30,6 +30,11 @@ if(navigator.serviceWorker){
 		if(reg.waiting){
 			// there's an udate ready
 			// console.log({msg: "sw waiting..."});
+
+			// we can decide to always update the sw whenevever waiting
+			activateWaitingSW(); return;
+
+			// or we can make it up to the user to update the page version
 			const button = {text: "Update", function: activateWaitingSW};
 			showSnackbar("Please update the page", [button]);
 			promptedUpdate = true;
