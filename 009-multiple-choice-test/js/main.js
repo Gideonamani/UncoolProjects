@@ -81,9 +81,10 @@ function getFromLocalStorage(key){
 // 1) make proper offline page
 // 2) display cached test on offline page
 // 3) delete the cached test in storage when user unchecks caching	
-function saveTestInCache(id){
-	caches.open('gideonamani-testor-test-#' + id).then(function(cache) {
-	  const jsonPath = './json/test'+ id +'.json';
+function saveTestInCache(testId){
+	return caches.open('gideonamani-testor-test-#' + testId)
+	.then(function(cache) {
+	  const jsonPath = '../json/'+ testId +'.json';
 	  fetch(jsonPath).then(function(response) {
 	    // /get-article-urls returns a JSON-encoded array of
 	    // resource URLs that a given article depends on
@@ -93,15 +94,20 @@ function saveTestInCache(id){
 	  	return getImageUrlsFromTestData(jsonData);
 	  }).then(function(urls) {
 	  	urls.push(jsonPath);
-	    cache.addAll(urls);
+	    return cache.addAll(urls);
 	  });
-	});	
+	}).catch( err => showSnackbar(err));	
+}
+
+function deleteTestCache(testId){
+	const cacheName = 'gideonamani-testor-test-#' + testId;
+	return caches.delete(cacheName);
 }
 
 function getImageUrlsFromTestData(testData){
 	const urls = [];
 	function cleanUrl(url){
-		if (url.startsWith("../")) return url.replace("..", ".");
+		if (url.startsWith("../")) return url.replace(".", ".");
 	}
 	for (var i = 0; i < testData.list.length; i++) {
 		const qn = testData.list[i];

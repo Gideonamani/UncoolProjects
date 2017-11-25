@@ -264,9 +264,12 @@
         		putInLocalStorage("storedTests", [jsonName]);
         	}
         	toggleActivatSaveTestUI();
-        	setTimeout(function(){
-        		toggleActivatSaveTestUI();
-        	}, 3000)
+        	
+        	saveTestInCache(jsonName).then( () => {
+	        	setTimeout(function(){
+	        		toggleActivatSaveTestUI();
+	        	}, 3000);
+        	});
         	showSnackbar("Test successfully saved.");
         }
 
@@ -274,7 +277,12 @@
         	const testIndex = storedTests.indexOf(jsonName);
         	storedTests.splice(testIndex, 1);
         	putInLocalStorage("storedTests", storedTests);
-        	showSnackbar("Test deleted from cache.");
+        	toggleActivatSaveTestUI();
+
+        	deleteTestCache(jsonName).then( () => {
+	        	showSnackbar("Test deleted from cache.");
+        		toggleActivatSaveTestUI();
+        	})
         }
 
         function checkIfTestSaved (){

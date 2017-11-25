@@ -30,15 +30,29 @@
 		<h1>You're la offline :'(</h1>
 
 		<p>Below, are list of pages you have cached: </p>
-		<ul class="cached-pages" hidden="true">
-			<!-- <li><a href="/UncoolProjects/009-multiple-choice-test/test.html">Test 01</a></li>
-			<li><a href="/UncoolProjects/009-multiple-choice-test/test.html">Test 02</a></li> -->
+		<ul class="cached-pages" hidden="true" id="cached-tests">
+			<!-- <li><a href="/UncoolProjects/009-multiple-choice-test/test.html">Test 01</a></li> -->
 		</ul>
 
 	</div>
 
-	<footer>
-		
-	</footer>
+	<footer></footer>
+	<script src="./js/main.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		const storedTests = getFromLocalStorage("storedTests");
+		if (storedTests){
+			const ul = document.getElementById('cached-tests');
+			ul.hidden = false;
+			storedTests.forEach(testKey => {
+				const prelink = "/UncoolProjects/009-multiple-choice-test/html/test.html?json=";
+				const li = document.createElement("LI");
+				const aTag = document.createElement("A");
+				aTag.href = prelink+testKey;
+				aTag.textContent = "Test: "+testKey;
+				li.appendChild(aTag);
+				ul.appendChild(li);
+			})
+		}
+	</script>
 </body>
 </html>	
