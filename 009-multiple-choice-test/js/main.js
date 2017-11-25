@@ -53,7 +53,7 @@ function showSnackbar(text, buttons) {
 		buttons.forEach( button => {
 			const btn = document.createElement("BUTTON");
 			btn.textContent = button.text;
-			btn.onclick = function(){ button.function.apply(functionArgs) };
+			btn.onclick = function(){ button.function.apply(button.functionArgs) };
 			btnsDiv.appendChild(btn);
 		});
     }
