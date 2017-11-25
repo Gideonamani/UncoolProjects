@@ -86,3 +86,9 @@ function fetchFromNetwork (event){
 		return caches.match("./offline.html").then(offlinePage => offlinePage);
 	})
 }
+
+
+self.addEventListener('message', function(event){
+	// console.log("SW message:", event.data);
+	if(event.data.skipWaiting) self.skipWaiting();
+});
