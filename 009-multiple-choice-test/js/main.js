@@ -63,7 +63,53 @@ function showSnackbar(text, buttons) {
 
     // After 3 seconds, remove the show class from DIV and delete it
     setTimeout(function(){
-    snackbarDiv.classList.remove("show");
-        // snackbarDiv.remove()
+	    snackbarDiv.classList.remove("show");
+	    snackbarDiv.remove();
     }, 3000);
+}
+
+function putInLocalStorage(key, data){
+	window.localStorage.setItem(key, JSON.stringify(data));
+}
+function getFromLocalStorage(key){
+	const dataString = window.localStorage.getItem(key);
+	return JSON.parse(dataString);
+}
+
+
+// TODO 
+// 1) make proper offline page
+// 2) display cached test on offline page
+// 3) delete the cached test in storage when user unchecks caching	
+function saveTestInCache(id){
+	caches.open('gideonamani-testor-test-#' + id).then(function(cache) {
+	  const jsonPath = './json/test'+ id +'.json';
+	  fetch(jsonPath).then(function(response) {
+	    // /get-article-urls returns a JSON-encoded array of
+	    // resource URLs that a given article depends on
+	    return response.json();
+	  }).then(function(jsonData){
+	  	// calc all the urls resources for this test by reading the image keys
+	  	return getImageUrlsFromTestData(jsonData);
+	  }).then(function(urls) {
+	  	urls.push(jsonPath);
+	    cache.addAll(urls);
+	  });
+	});	
+}
+
+function getImageUrlsFromTestData(testData){
+	const urls = [];
+	function cleanUrl(url){
+		if (url.startsWith("../")) return url.replace("..", ".");
+	}
+	for (var i = 0; i < testData.list.length; i++) {
+		const qn = testData.list[i];
+		if(qn.image) urls.push(cleanUrl(qn.image));
+		for (var j = 0; j < qn.options.length; j++) {
+			const optionImage = qn.options[j].image;
+			if(optionImage) urls.push(cleanUrl(optionImage));
+		}
+	}
+	return urls;
 }

@@ -141,6 +141,11 @@
 				<button id="show-full-report">Show Full Report</button>
 				<button onclick="takeDifferentTest()">Take different Test</button>
 			</div>
+			<div class="further-options" id="save-test-ui-div">
+				<label>
+					<span class="bold">Save test for offline view</span>
+					<input id="save-test-input" type="checkbox" name="" onchange="saveOrDeleteTest()">
+				</label>
 		</div>
 	</div>
 
@@ -165,9 +170,10 @@
         const url = new URL(url_string);
         const jsonName = url.searchParams.get("json");
         const jsonPath = "../json/"+jsonName+".json";
+        checkIfTestSaved();
 
         getJSON(jsonPath).then( json => {
-        	console.log(jsonPath, "\n", "Data:", json );
+        	// console.log(jsonPath, "\n", "Data:", json );
         	initTestApp(json);
 			hideLoading();
         }).catch( err => show404(err) );
@@ -233,6 +239,49 @@
 			while (reportNode.firstChild) {
 			    reportNode.removeChild(reportNode.firstChild);
 			}
+        }
+
+        function saveOrDeleteTest(){
+        	inputChecked = document.getElementById("save-test-input").checked;
+        	const storedTests = getFromLocalStorage("storedTests");
+        	if (inputChecked) {
+        		saveTestForOfflineView(storedTests);
+        	}else{
+        		removeTestFromCache(storedTests);
+        	}
+        }
+
+        function toggleActivatSaveTestUI (){
+        	document.getElementById("save-test-ui-div").classList.toggle("deactive");
+        	const activeState = document.getElementById("save-test-input").disabled;
+        	document.getElementById("save-test-input").disabled = !activeState;
+        };
+        function saveTestForOfflineView(storedTests){
+        	if(storedTests){
+        		storedTests.push(jsonName);
+        		putInLocalStorage("storedTests", storedTests);
+        	}else{
+        		putInLocalStorage("storedTests", [jsonName]);
+        	}
+        	toggleActivatSaveTestUI();
+        	setTimeout(function(){
+        		toggleActivatSaveTestUI();
+        	}, 3000)
+        	showSnackbar("Test successfully saved.");
+        }
+
+        function removeTestFromCache(storedTests){
+        	const testIndex = storedTests.indexOf(jsonName);
+        	storedTests.splice(testIndex, 1);
+        	putInLocalStorage("storedTests", storedTests);
+        	showSnackbar("Test deleted from cache.");
+        }
+
+        function checkIfTestSaved (){
+        	const storedTests = getFromLocalStorage("storedTests");
+        	if(!storedTests) return;
+        	const saveTestCheckbox = document.getElementById("save-test-input");
+        	saveTestCheckbox.checked = (storedTests.indexOf(jsonName) > -1);
         }
 	</script>
 </body>

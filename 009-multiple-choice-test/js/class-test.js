@@ -113,7 +113,6 @@ class Test {
 		const total = this.questions.length;
 		const correctFraction = correctItems / total;
 		const percScore = Math.ceil(correctFraction * 100);
-		console.log(percScore);
 		document.getElementById("test-score").textContent = percScore;
 		document.querySelector(".results-wrapper").classList.add("show");
 	};

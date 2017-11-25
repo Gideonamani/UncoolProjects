@@ -194,8 +194,16 @@ section.options.unanswered {
 .results .further-options {
 	display: flex;
 	justify-content: space-around;
+  margin: 16px 0;
 }
 
+.further-options#save-test-ui-div.deactive {
+  color: lightgray;
+}
+
+.bold {
+  font-weight: bold;
+}
 
 
 
