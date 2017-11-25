@@ -330,3 +330,74 @@ section.options.unanswered {
     -webkit-transform: rotate(-360deg);
   }
 }
+
+
+
+/*SNACKBAR*/
+
+/* SNACKBAR */
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar-wrapper {
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    text-align: center; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+    /*left: 30px;*/ /* 30px from the left */
+    width: 100%;
+}
+.snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px;
+    width:60%;
+    max-width: 600px;
+    background-color: #616161; /* Black background color */
+    border: solid lightgray 0.5px;
+    color: whitesmoke; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 4px; /* Rounded borders */
+    padding: 8px; /* Padding */
+    margin: 0 auto;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.snackbar.justify-space-between {
+    justify-content: space-between;
+}
+
+.snackbar button {
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+.snackbar.show {
+    visibility: visible; /* Show the snackbar */
+
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
