@@ -1,5 +1,5 @@
 const appCacheNames = ['gideonamani-testor-v1'];
-const mainCache = appCacheNames[0];// 02
+const mainCache = appCacheNames[0];// 04
 
 self.addEventListener('install', event => {
 	console.log("Installing SW");
@@ -13,6 +13,8 @@ self.addEventListener('install', event => {
 					"./offline.html",
 					"./js/index.js",
 					"./js/main.js",
+					"./js/language.js",
+					"./json/languages.json",
 					"./css/main.css",
 					"./images/icons/icon-size-72.png",
 					"./favicon.ico",
