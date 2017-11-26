@@ -2,9 +2,10 @@
 	"en-US": {
 		"test": "",
 		"testYourSelf": "",
+		"changeLanguage" : "change language",
 		"welcomeToTestor": "Welcome to Testor",
 		"pleaseChooseTest": "Please choose the test you'd like to take:",
-		"proceed": "proceed",
+		"proceed": "Proceed",
 		"page": "page",
 		"of": "of",
 		"submitTestForEval": "Submit Test for Evaluation",
@@ -38,6 +39,7 @@
 	"sw-TZ": {
 		"test": "",
 		"testYourSelf": "",
+		"changeLanguage" : "badilisha lugha",
 		"welcomeToTestor": "Karibu kwenye Testor",
 		"pleaseChooseTest": "Tafadhali chagua jaribio ungelopenda kufanya:",
 		"proceed": "Anza",
@@ -74,9 +76,10 @@
 	"ru-RU": {
 		"test": "",
 		"testYourSelf": "",
-		"welcomeToTestor": "Welcome to Testor",
-		"pleaseChooseTest": "Please choose the test you'd like to take:",
-		"proceed": "proceed",
+		"changeLanguage" : "изменить язык",
+		"welcomeToTestor": "Добро пожаловать на Тестор",
+		"pleaseChooseTest": "Пожалуйста выбирайте тест:",
+		"proceed": "Продолжить",
 		"page": "page",
 		"of": "of",
 		"submitTestForEval": "Submit Test for Evaluation",

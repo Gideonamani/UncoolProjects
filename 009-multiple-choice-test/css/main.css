@@ -72,8 +72,8 @@ img {
 
 .image-wrapper.no-image {display: none;}
 
-.container.home select,
-.container.home button {
+.container.home > select,
+.container.home > button {
   font-size: 1.1rem;
   padding: 4px;
   width: 80%;
@@ -82,6 +82,18 @@ img {
 .container.offline ul {
   max-height: 100px;
   /*overflow-y: auto;*/
+}
+
+#language-selector {
+  display: flex;
+  /*justify-content: space-around;*/
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-top: 48px;
+}
+#language-selector select {
+  margin-left: 8px
 }
 
 
@@ -226,6 +238,9 @@ section.options.unanswered {
   font-weight: bold;
 }
 
+.center-text {
+  text-align: center;
+}
 
 
 

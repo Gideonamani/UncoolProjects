@@ -42,6 +42,15 @@
 		
 		<button data-lang-keyword="proceed" onclick="goToTestPage()">Proceed</button>
 
+		<div id="language-selector">
+			<span data-lang-keyword="changeLanguage" data-text-case="sentenceCase">
+			Change language:</span> 
+			<select onchange="changePageLanguage()">
+				<option value="en-US">English</option>
+				<option value="sw-TZ" selected="true">Kiswahili</option>
+				<option value="ru-RU">Русский</option>
+			</select>
+		</div>
 	</div>
 
 	<footer>
@@ -53,10 +62,20 @@
 	<script src="./js/main.js" type="text/javascript"></script>
 	<script src="./js/language.js" type="text/javascript"></script>
 	<script type="text/javascript">
+		const selectLangEl = document.querySelector("#language-selector select");
 		function goToTestPage(){
 			const jsonFileName = document.querySelector("select").value;
 			window.location.href = "./html/test.html?json="+jsonFileName;
 		}
+		function changePageLanguage(){
+			putInLocalStorage("languagePreference", selectLangEl.value);
+			window.location.reload();
+		}
+		(function setPreferredLangOnSelectEl(){
+			const userLangPreference = getFromLocalStorage("languagePreference");
+			if(!userLangPreference)return;
+			selectLangEl.value = userLangPreference;
+		})();
 	</script>
 </body>
 
