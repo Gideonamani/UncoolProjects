@@ -1,5 +1,5 @@
 const appCacheNames = ['gideonamani-testor-v1'];
-const mainCache = appCacheNames[0];// 01
+const mainCache = appCacheNames[0];// 02
 
 self.addEventListener('install', event => {
 	console.log("Installing SW");
