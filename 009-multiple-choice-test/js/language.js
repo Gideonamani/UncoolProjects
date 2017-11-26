@@ -2,8 +2,8 @@
 const userLangPreference = getFromLocalStorage("languagePreference");
 
 // get the language json with keyword and translation pairs
-getJSON("./json/languages.json").then( languagesData => {
-// getJSON(urlsPREFIX+"json/languages.json").then( languagesData => {
+// getJSON("./json/languages.json").then( languagesData => {
+getJSON(urlsPREFIX+"json/languages.json").then( languagesData => {
 	// console.log(languagesData);
 	document.querySelectorAll("[data-lang-keyword]").forEach(elNode => {
 		// get the keyword
