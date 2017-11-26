@@ -37,7 +37,9 @@ a:visited {
 
 .container {
 	height: 400px;
-	max-height: 400px;
+	/*max-height: 400px;*/
+  height: 75vh;
+  min-height: 400px;
 	margin: 8px auto;
 	/*background: yellow;*/
 	padding: 8px;
@@ -49,11 +51,15 @@ a:visited {
 .container.home,
 .container.offline {
 	text-align: center;    
-  text-align: center;
+  height: 94vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+
+.hide {
+  display: none;
 }
 
 .image-wrapper {
@@ -90,15 +96,15 @@ section.options.unanswered {
 }
 
 .option {
-    width: 49.2%;
-    margin: 4px 0;
-    /* background: lightgray; */
-    padding: 4px;
-    border: solid #e4e4e4 1px;
-    border-radius: 4px;
-    display: inline-flex;
-    justify-content: space-around;
-    align-items: center;
+  width: 49.2%;
+  margin: 4px 0;
+  /* background: lightgray; */
+  padding: 4px;
+  border: solid #e4e4e4 1px;
+  border-radius: 4px;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
     box-sizing: border-box;
 }
 
@@ -132,7 +138,13 @@ section.options.unanswered {
 .paginator .center-content {
 	width: 100%;
 }
-
+.paginator-wrapper p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+.paginator .center-content progress {
+  margin: 2px 0;
+}
 .paginator p {
 	margin: 0;
 }
@@ -151,11 +163,13 @@ section.options.unanswered {
 
 .results-wrapper,
 .full-report-wrapper {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    top: 0;
-    background: whitesmoke;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;    
+  background: whitesmoke;
     display: none;
 }
 .results-wrapper.show,
@@ -163,32 +177,39 @@ section.options.unanswered {
     display: block;
 }
 
+.results-wrapper .container {
+  height: 88vh;
+  min-height: 400px;
+}
+
+.container.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .results h2 {
 	text-align: center;
 }
 
 .results .test-mark {
-    font-size: 2rem;
-    width: 200px;
-    height: 200px;
-    margin: 32px auto;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4px;
-    color: azure;
-}
-
-.results h2 {
-
+  font-size: 2rem;
+  width: 200px;
+  height: 200px;
+  margin: 24px auto;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  color: azure;
 }
 
 .test-mark.ok {
-    color: azure;
-    background: #9C27B0;
-    border: solid #7B1FA2 2px;
-    box-shadow: #8E24AA 0px 0px 10px 0px
+  color: azure;
+  background: #9C27B0;
+  border: solid #7B1FA2 2px;
+  box-shadow: #8E24AA 0px 0px 10px 0px
 }
 
 .results .further-options {
@@ -272,16 +293,16 @@ section.options.unanswered {
 /*SPINNER*/
 /*http://tobiasahlin.com/spinkit/*/
 .page-spinner {
-    position: absolute;
-    overflow-x: hidden;
-    top: 0;
-    display: flex;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    background: whitesmoke;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  overflow-x: hidden;
+  top: 0;
+  display: flex;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: whitesmoke;
+  width: 100%;
+  height: 100%;
 }
 .page-spinner.show {
     display: flex;
@@ -346,66 +367,66 @@ section.options.unanswered {
 /* SNACKBAR */
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar-wrapper {
-    position: fixed; /* Sit on top of the screen */
-    z-index: 1; /* Add a z-index if needed */
-    text-align: center; /* Center the snackbar */
-    bottom: 30px; /* 30px from the bottom */
-    /*left: 30px;*/ /* 30px from the left */
-    width: 100%;
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  text-align: center; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+  /*left: 30px;*/ /* 30px from the left */
+  width: 100%;
 }
 .snackbar {
-    visibility: hidden; /* Hidden by default. Visible on click */
-    min-width: 250px;
-    width:60%;
-    max-width: 600px;
-    background-color: #616161; /* Black background color */
-    border: solid lightgray 0.5px;
-    color: whitesmoke; /* White text color */
-    text-align: center; /* Centered text */
-    border-radius: 4px; /* Rounded borders */
-    padding: 8px; /* Padding */
-    margin: 0 auto;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px;
+  width:60%;
+  max-width: 600px;
+  background-color: #616161; /* Black background color */
+  border: solid lightgray 0.5px;
+  color: whitesmoke; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 4px; /* Rounded borders */
+  padding: 8px; /* Padding */
+  margin: 0 auto;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
     justify-content: center;
 }
 .snackbar.justify-space-between {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .snackbar button {
-    border-radius: 4px;
-    margin-left: 8px;
+  border-radius: 4px;
+  margin-left: 8px;
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
 .snackbar.show {
-    visibility: visible; /* Show the snackbar */
+  visibility: visible; /* Show the snackbar */
 
 /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
 However, delay the fade out process for 2.5 seconds */
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 /* Animations to fade the snackbar in and out */
 @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
 }
 
 @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }
