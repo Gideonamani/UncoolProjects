@@ -97,10 +97,10 @@ class Test {
 		return checkedPercentage;
 	};
 	calcPageIndex(){
-		const pageIndexSpan = document.getElementById("page-index");
-		const currentQnIndex = this.currentQuestionIndex + 1;
-		const totalQns = this.questions.length;
-		pageIndexSpan.textContent = `${currentQnIndex} of ${totalQns}`;
+		const qnIndexSpan = document.getElementById("question-index");
+		const totalQnsSpan = document.getElementById("total-questions");
+		qnIndexSpan.textContent = this.currentQuestionIndex + 1;
+		totalQnsSpan.textContent = this.questions.length;
 	}
 	showResults(){
 		// display percentage of correctly answered question to

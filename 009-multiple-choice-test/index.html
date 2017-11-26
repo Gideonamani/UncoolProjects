@@ -18,7 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
 </head>
 
-<body>
+<body hidden="true">
 	<header>
 		
 	</header>
@@ -27,9 +27,9 @@
 		<div class="image-wrapper">
 			<img src="./images/icons/icon-size-72.png">
 		</div>
-		<h1>Welcome to Testor</h1>
+		<h1 data-lang-keyword="welcomeToTestor">Welcome to Testor</h1>
 
-		<p>Please choose the test you'd like to take: </p>
+		<p data-lang-keyword="pleaseChooseTest">Please choose the test you'd like to take: </p>
 
 		<select>
 			<option value="test01"> 1: Способы стопорения резбовых соединений </option>
@@ -40,7 +40,7 @@
 			<option value="test06"> 6: Способы вывинчивания шпилек </option>
 		</select>
 		
-		<button onclick="goToTestPage()">Proceed</button>
+		<button data-lang-keyword="proceed" onclick="goToTestPage()">Proceed</button>
 
 	</div>
 
@@ -51,6 +51,7 @@
 
 	<script src="./js/index.js" type="text/javascript"></script>
 	<script src="./js/main.js" type="text/javascript"></script>
+	<script src="./js/language.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		function goToTestPage(){
 			const jsonFileName = document.querySelector("select").value;

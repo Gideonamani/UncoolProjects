@@ -1,5 +1,5 @@
 console.log("ready");
-
+const urlsPREFIX = "/UncoolProjects/009-multiple-choice-test/";
 function getJSON (jsonPath){
 	return fetch(jsonPath)
 	.then( res => {
@@ -12,12 +12,33 @@ function getJSON (jsonPath){
 }
 
 
+
 function showLoading(){
 	// document.querySelector(".container").classList.remove("show");
+	if(!document.querySelector(".page-spinner")){
+		const pageSpinnerDiv = document.createElement("DIV");
+		pageSpinnerDiv.classList.add("page-spinner");
+		const spinnerDiv = document.createElement("DIV");
+		spinnerDiv.classList.add("spinner");
+		const cube1Div = document.createElement("DIV");
+		cube1Div.classList.add("cube1");
+		const cube2Div = document.createElement("DIV");
+		cube2Div.classList.add("cube2");
+
+		const loadingTextP = document.createElement("P");
+		loadingTextP.textContent = "Loading...";
+
+		pageSpinnerDiv.appendChild(spinnerDiv);
+		spinnerDiv.appendChild(loadingTextP);
+		spinnerDiv.appendChild(cube1Div);
+		spinnerDiv.appendChild(cube2Div);
+		document.querySelector(".container").appendChild(pageSpinnerDiv);
+	}
 	document.querySelector(".page-spinner").classList.add("show");
 }
 
 function hideLoading(){
+	if(!document.querySelector(".page-spinner")) return;
 	// document.querySelector(".container").classList.add("show");
 	document.querySelector(".page-spinner").classList.remove("show");
 }

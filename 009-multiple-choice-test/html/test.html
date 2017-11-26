@@ -18,7 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 
-<body>
+<body hidden="true">
 	<header>
 		
 	</header>
@@ -32,28 +32,54 @@
 
 		<div class="paginator-wrapper">
 			<div class="paginator">
-				<button id="prev-question">PREV</button>
+				<button id="prev-question" data-lang-keyword="prev" 
+				data-text-case="upperCase">PREV</button>
 				<div class="center-content">
 					<div>
 						<progress value="0" max="100">
 					</div>
 					<div>
-						<p>Page: <span id="page-index"> </span></p>
+						<p>
+							<span data-lang-keyword="page" data-text-case="sentenceCase">Page:</span>
+							<span id="question-index"> </span>
+							<span data-lang-keyword="of">of:</span>
+							<span id="total-questions"> </span>
+						</p>
 					</div>
-					<button id="submit-for-evaluation"> Submit Test for Evaluation </button>
+					<button id="submit-for-evaluation" data-lang-keyword="submitTestForEval">
+						Submit Test for Evaluation 
+					</button>
 				</div>
-				<button id="next-question">NEXT</button>
+				<button id="next-question" data-lang-keyword="next" 
+				data-text-case="upperCase">NEXT</button>
 			</div>
 			<div class="confirm-evaluation">
 				<div>
-					<p>Not all questions are answered. Are you sure you want to proceed with evaluation?</p>
-					<button id="cancel-submition">CANCEL</button>
-					<button id="confirm-submition">EVALUATE</button>
+					<p>
+						<span data-lang-keyword="notAllQnsAnswered">
+							Not all questions are answered.
+						</span>
+						<span data-lang-keyword="sureToProceedEval">
+							Are you sure you want to proceed with evaluation?
+						</span>
+					</p>
+					<button id="cancel-submition">
+						<span data-lang-keyword="cancel" data-text-case="upperCase">
+						CANCEL</span>
+					</button>
+					<button id="confirm-submition">
+						<span data-lang-keyword="evaluate" data-text-case="upperCase">
+						EVALUATE</span>
+					</button>
 				</div>
 
 				<div>
 					<label>
-						<p>Highlight options on unanswered question?</p>
+						<p>
+							<span data-lang-keyword="highlightOnUnanswered">
+								Highlight options on unanswered question?
+							</span>
+						</p>
 						<input id="highlight-unanswered" type="checkbox" name="">
 					</label>
 				</div>
@@ -68,7 +94,11 @@
 
     <div class="page-spinner">
         <div class="spinner">
-            <p>Loading...</p>
+            <p>
+            	<span data-lang-keyword="loading" data-text-case="sentenceCase">
+            		Loading
+            	</span>...
+            </p>
             <div class="cube1"></div>
             <div class="cube2"></div>
         </div>
@@ -103,7 +133,9 @@
 			
 
 		<div class="report-question-wrapper question-wrapper">
-			<h3 class="question-number">Question <span class="figure"></span>: 
+			<h3 class="question-number">
+				<span data-lang-keyword="question" data-text-case="sentenceCase">Question</span>
+				<span class="figure"></span>: 
 				<span class="question-evaluation-status"></span>
 			</h3>
 			<p class="question-text"></p>
@@ -112,15 +144,21 @@
 			</div>
 
 			<ul class="answers">
-				<p> Answer:</p>
+				<p> 
+					<span data-lang-keyword="answer" data-text-case="sentenceCase">Answer</span>:
+				</p>
 			</ul>
 
 			<ul class="correct">
-				<p> Correct:</p>
+				<p> 
+					<span data-lang-keyword="correct" data-text-case="sentenceCase">Correct</span>:
+				</p>
 			</ul>
 
 			<ul class="incorrect">
-				<p> Incorrect:</p>
+				<p>
+					<span data-lang-keyword="incorrect" data-text-case="sentenceCase">Incorrect</span>:
+				</p>
 			</ul>
 		</div>
 		
@@ -130,7 +168,11 @@
 
 	<div class="results-wrapper">
 		<div class="container results">
-			<h2>Your test score is:</h2>
+			<h2>
+				<span data-lang-keyword="yourTestScoreIs">
+				Your test score is
+				</span>
+			</h2>
 
 			<div class="test-mark ok">
 				<h1>
@@ -139,13 +181,25 @@
 			</div>
 
 			<div class="further-options">
-				<button onclick="retakeTest()">Repeat test</button>
-				<button id="show-full-report">Show Full Report</button>
-				<button onclick="takeDifferentTest()">Take different Test</button>
+				<button onclick="retakeTest()">
+					<span data-lang-keyword="repeatTest">
+					Repeat test
+					</span>
+				</button>
+				<button id="show-full-report">
+					<span data-lang-keyword="showFullReport">
+					Show full report
+					</span>
+				</button>
+				<button onclick="takeDifferentTest()">
+					<span data-lang-keyword="takeDiffTest">
+					Take different test
+					</span>
+				</button>
 			</div>
 			<div class="further-options" id="save-test-ui-div">
 				<label>
-					<span class="bold">Save test for offline view</span>
+					<span data-lang-keyword="saveTestForOffline" class="bold">Save test for offline view</span>
 					<input id="save-test-input" type="checkbox" name="" onchange="saveOrDeleteTest()">
 				</label>
 		</div>
@@ -157,11 +211,18 @@
 		<div class="container full-report">
 		</div>
 
-		<footer><button onclick="hideFullReport()">Close</button></footer>
+		<footer>
+			<button onclick="hideFullReport()">
+				<span data-lang-keyword="close" data-text-case="sentenceCase">
+					Close
+				</span>
+			</button>
+		</footer>
 	</div>
 
 
 	<script src="../js/main.js" type="text/javascript"></script>
+	<script src="../js/language.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		showLoading();
 	</script>
