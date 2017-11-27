@@ -1,4 +1,4 @@
-const appCacheNames = ['gideonamani-testor-v1'];
+const appCacheNames = ['gideonamani-testor-v2'];
 const mainCache = appCacheNames[0];// 06
 
 self.addEventListener('install', event => {
