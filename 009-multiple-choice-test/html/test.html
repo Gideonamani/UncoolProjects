@@ -314,7 +314,7 @@
         	}
         }
 
-        function toggleActivatSaveTestUI (){
+        function toggleEnableSaveTestUI (){
         	document.getElementById("save-test-ui-div").classList.toggle("deactive");
         	const activeState = document.getElementById("save-test-input").disabled;
         	document.getElementById("save-test-input").disabled = !activeState;
@@ -326,11 +326,11 @@
         	}else{
         		putInLocalStorage("storedTests", [jsonName]);
         	}
-        	toggleActivatSaveTestUI();
+        	toggleEnableSaveTestUI();
         	
         	saveTestInCache(jsonName).then( () => {
 	        	setTimeout(function(){
-	        		toggleActivatSaveTestUI();
+	        		toggleEnableSaveTestUI();
 	        	}, 3000);
         	});
         	showSnackbar("Test successfully saved.");
@@ -340,11 +340,11 @@
         	const testIndex = storedTests.indexOf(jsonName);
         	storedTests.splice(testIndex, 1);
         	putInLocalStorage("storedTests", storedTests);
-        	toggleActivatSaveTestUI();
+        	toggleEnableSaveTestUI();
 
         	deleteTestCache(jsonName).then( () => {
 	        	showSnackbar("Test deleted from cache.");
-        		toggleActivatSaveTestUI();
+        		toggleEnableSaveTestUI();
         	})
         }
 
