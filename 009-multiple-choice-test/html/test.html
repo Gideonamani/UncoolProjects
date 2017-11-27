@@ -231,13 +231,16 @@
 	<script type="text/javascript">
         const url_string = window.location.href; 
         const url = new URL(url_string);
-        const jsonName = url.searchParams.get("json");
-        const jsonPath = "../json/"+jsonName+".json";
+        const jsonID = url.searchParams.get("json");
+        const jsonPath = "../json/"+jsonID+".json";
         checkIfTestSaved();
+        cleanLocalStorage();
 
+        let testJSONData;
         getJSON(jsonPath).then( json => {
         	// console.log(jsonPath, "\n", "Data:", json );
         	initTestApp(json);
+        	testJSONData = json;
 			hideLoading();
         }).catch( err => show404(err) );
 
@@ -306,7 +309,7 @@
 
         function saveOrDeleteTest(){
         	inputChecked = document.getElementById("save-test-input").checked;
-        	const storedTests = getFromLocalStorage("storedTests");
+        	const storedTests = getFromLocalStorage(localTestStoreName);
         	if (inputChecked) {
         		saveTestForOfflineView(storedTests);
         	}else{
@@ -320,39 +323,48 @@
         	document.getElementById("save-test-input").disabled = !activeState;
         };
         function saveTestForOfflineView(storedTests){
-        	if(storedTests){
-        		storedTests.push(jsonName);
-        		putInLocalStorage("storedTests", storedTests);
-        	}else{
-        		putInLocalStorage("storedTests", [jsonName]);
-        	}
         	toggleEnableSaveTestUI();
+    		// storedTest is an object and not an array
+    		const testName = testJSONData.name || jsonID;
+        	const testDataToBeStored = {name: testName};
+        	let newStoredTests = storedTests || {};
+    		newStoredTests[jsonID] = testDataToBeStored;
+    		putInLocalStorage(localTestStoreName, newStoredTests);
         	
-        	saveTestInCache(jsonName).then( () => {
+        	saveTestInCache(jsonID).then( () => {
+	        	showSnackbar("Test successfully saved.");
 	        	setTimeout(function(){
 	        		toggleEnableSaveTestUI();
 	        	}, 3000);
         	});
-        	showSnackbar("Test successfully saved.");
         }
 
         function removeTestFromCache(storedTests){
-        	const testIndex = storedTests.indexOf(jsonName);
-        	storedTests.splice(testIndex, 1);
-        	putInLocalStorage("storedTests", storedTests);
+        	delete(storedTests[jsonID]);
+        	putInLocalStorage(localTestStoreName, storedTests);
         	toggleEnableSaveTestUI();
 
-        	deleteTestCache(jsonName).then( () => {
+        	deleteTestCache(jsonID).then( () => {
 	        	showSnackbar("Test deleted from cache.");
         		toggleEnableSaveTestUI();
         	})
         }
 
+        function cleanLocalStorage(){
+        	for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+        		const lsKey = localStorage.key(i);
+        		if(lsKey.startsWith("storedTests")  && (lsKey !== localTestStoreName)){
+        			localStorage.removeItem(lsKey);
+        		}
+				// console.log( localStorage.getItem( localStorage.key( i ) ) );
+			}
+        }
+
         function checkIfTestSaved (){
-        	const storedTests = getFromLocalStorage("storedTests");
+        	const storedTests = getFromLocalStorage(localTestStoreName);
         	if(!storedTests) return;
         	const saveTestCheckbox = document.getElementById("save-test-input");
-        	saveTestCheckbox.checked = (storedTests.indexOf(jsonName) > -1);
+        	saveTestCheckbox.checked = !!storedTests[jsonID];
         }
 	</script>
 </body>

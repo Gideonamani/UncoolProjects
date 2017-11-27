@@ -1,5 +1,7 @@
 console.log("ready");
 const urlsPREFIX = "/UncoolProjects/009-multiple-choice-test/";
+const localTestStoreName = "storedTests-v1";
+
 function getJSON (jsonPath){
 	return fetch(jsonPath)
 	.then( res => {
