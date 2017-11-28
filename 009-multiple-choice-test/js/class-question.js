@@ -5,26 +5,32 @@ const qnData = 		{
 			"options": [
 				{
 					"text": "Cockpit, Wings, Tyres",
-					"image": "../images/some-image.png"
+					"image": "../images/some-image.png",
+					"value": "a"
 				},
 				{
 					"text": "Wings, Propellor, Engine, Ailerons",
-					"image": "../images/some-image.png"
+					"image": "../images/some-image.png",
+					"value": "b"
 				},
 				{
 					"text": "Engine(s), Wings, Tail, Langing Gear, Fuselage",
-					"image": ""
+					"image": "",
+					"value": "c"
 				},
 				{
 					"text": "Cockpit, Wings, Chairs, Rudder",
-					"image": "../images/some-image.png"
+					"image": "../images/some-image.png",
+					"value": "d"
 				}
 			],
 			"answers": [{
 				"text": "Engine(s), Wings, Tail, Langing Gear, Fuselage",
-				"image": "../images/some-image.png"
+				"image": "../images/some-image.png",
+				"value": "c"
 			}]
 		}
+
 
 
 class Question {
@@ -75,9 +81,16 @@ class Question {
 			const tempOption = document.querySelector(".templates .option-item");
 			const optionNode = tempOption.cloneNode(true);
 
-			optionNode.querySelector("p").textContent = optionData.text;
+			const optionsTextP = optionNode.querySelector("p");
+			if(optionData.text){
+				optionsTextP.textContent = optionData.text;
+			}else{
+				optionsTextP.classList.add("no-text");
+			}
+
 			if(optionData.image){
 				optionNode.querySelector("img").src = optionData.image;
+				optionNode.classList.add("has-image");
 			}else{
 				optionNode.querySelector(".image-wrapper").classList.add("no-image");
 			}

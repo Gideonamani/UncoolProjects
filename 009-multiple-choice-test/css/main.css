@@ -62,16 +62,6 @@ a:visited {
   display: none;
 }
 
-.image-wrapper {
-	text-align: center;
-}
-.image-wrapper img,
-img {
-  max-width: 100%;
-}
-
-.image-wrapper.no-image {display: none;}
-
 .container.home > select,
 .container.home > button {
   font-size: 1.1rem;
@@ -109,6 +99,7 @@ section.options.unanswered {
 
 .option {
   width: 49.2%;
+  width: 100%;
   margin: 4px 0;
   /* background: lightgray; */
   padding: 4px;
@@ -128,6 +119,29 @@ section.options.unanswered {
 	width: 90%;
 }
 
+.image-wrapper {
+  text-align: center;
+}
+.image-wrapper img,
+img {
+  max-width: 100%;
+}
+
+.question .image-wrapper img {
+  max-height: 200px;
+}
+.option .image-wrapper img {
+  max-height: 100px;
+}
+
+.option-item.has-image p.option-text {
+  text-align: center;
+}
+
+p.option-text.no-text,
+.image-wrapper.no-image {
+  display: none;
+}
 
 
 .paginator,
