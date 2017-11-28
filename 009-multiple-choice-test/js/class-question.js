@@ -96,7 +96,7 @@ class Question {
 			}
 
 			const optionInput = optionNode.querySelector("input");
-			optionInput.name = this.data.text;
+			optionInput.name = this.data.id || this.data.text;
 			if(!this.isQnWithSingleAnswer){
 				optionInput.type = "checkbox";
 				optionInput.name = "";
@@ -162,8 +162,11 @@ class Question {
 			let optionIsCorrect = false;
 			for (let j = 0; j < this.data.answers.length; j++) {
 				const answer = this.data.answers[j];
-				if (checkedAns.text === answer.text) {
-				// if (checkedAns.value === answer.value) {
+				// use value as default criterion to check if the answer is
+				// correct or not, if the answer has no value prop then use text
+				// this is to allow options with images which don't have texts
+				const criterion = answer.value ? "value" : "text";
+				if (checkedAns[criterion] === answer[criterion]) {
 					optionIsCorrect = true;
 					break;
 				}
