@@ -1,0 +1,288 @@
+{
+	"intro": "Welcome to test number one",
+	"name": "Способы стопорения резбовых соединений",
+	"gradeWithCSS": true,
+	"list": [
+		{	
+			"type": "single",
+			"text": "Какой способ стопорения резбовых соединений указан?",
+			"image": "../images/structures/1а.jpg",
+			"options": [
+				{
+					"text": "контрогайкой",
+					"image": "../images/structures/1в.jpg",
+					"value": "a"
+				},
+				{
+					"text": "шплинтом",
+					"image": "../images/structures/1а.jpg",
+					"value": "b"
+				},
+				{
+					"text": "гроверной шайбой",
+					"image": "../images/structures/1б.jpg",
+					"value": "c"
+				},
+				{
+					"text": "проволокой",
+					"image": "../images/structures/1г.jpg",
+					"value": "d"
+				}
+			],
+			"answers": [{
+				"text": "контрогайкой",
+				"image": "",
+				"value": "a"
+			}]
+		},
+		{	
+			"type": "single",
+			"text": "Какой способ стопорения резбовых соединений указан?",
+			"image": "../images/structures/1б.jpg",
+			"options": [
+				{
+					"text": "",
+					"image": "../images/structures/1в.jpg",
+					"value": "a"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1а.jpg",
+					"value": "b"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1б.jpg",
+					"value": "c"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1г.jpg",
+					"value": "d"
+				}
+			],
+			"answers": [{
+				"text": "шплинтом",
+				"image": "../images/structures/1б.jpg",
+					"value": "c"
+			}]
+		},
+		{	
+			"type": "single",
+			"text": "Какой способ стопорения резбовых соединений указан?",
+			"image": "../images/structures/1в.jpg",
+			"options": [
+				{
+					"text": "",
+					"image": "../images/structures/1в.jpg",
+					"value": "a"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1а.jpg",
+					"value": "b"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1б.jpg",
+					"value": "c"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1г.jpg",
+					"value": "d"
+				}
+			],
+			"answers": [{
+				"text": "гроверной шайбой",
+				"image": ""
+			}]
+		},
+		{	
+			"type": "single",
+			"text": "Какой способ стопорения резбовых соединений указан?",
+			"image": "../images/structures/1г.jpg",
+			"options": [
+				{
+					"text": "",
+					"image": "../images/structures/1в.jpg",
+					"value": "a"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1а.jpg",
+					"value": "b"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1б.jpg",
+					"value": "c"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1г.jpg",
+					"value": "d"
+				}
+			],
+			"answers": [{
+				"text": "специальной шайбой",
+				"image": ""
+			}]
+		},
+		{	
+			"type": "single",
+			"text": "Какой способ стопорения резбовых соединений указан?",
+			"image": "../images/structures/1д.jpg",
+			"options": [
+				{
+					"text": "",
+					"image": "../images/structures/1в.jpg",
+					"value": "a"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1а.jpg",
+					"value": "b"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1б.jpg",
+					"value": "c"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1г.jpg",
+					"value": "d"
+				}
+			],
+			"answers": [{
+				"text": "кольцом с полиамида с последующей опрессовки",
+				"image": ""
+			}]
+		},
+		{	
+			"type": "single",
+			"text": "Какой способ стопорения резбовых соединений указан?",
+			"image": "../images/structures/1е.jpg",
+			"options": [
+				{
+					"text": "",
+					"image": "../images/structures/1в.jpg",
+					"value": "a"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1а.jpg",
+					"value": "b"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1б.jpg",
+					"value": "c"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1г.jpg",
+					"value": "d"
+				}
+			],
+			"answers": [{
+				"text": "шайбой из полиамида",
+				"image": ""
+			}]
+		},
+		{	
+			"type": "single",
+			"text": "Какой способ стопорения резбовых соединений указан?",
+			"image": "../images/structures/1ж.jpg",
+			"options": [
+				{
+					"text": "",
+					"image": "../images/structures/1в.jpg",
+					"value": "a"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1а.jpg",
+					"value": "b"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1б.jpg",
+					"value": "c"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1г.jpg",
+					"value": "d"
+				}
+			],
+			"answers": [{
+				"text": "кернением",
+				"image": ""
+			}]
+		},
+		{	
+			"type": "single",
+			"text": "Какой способ стопорения резбовых соединений указан?",
+			"image": "../images/structures/1и.jpg",
+			"options": [
+				{
+					"text": "",
+					"image": "../images/structures/1в.jpg",
+					"value": "a"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1а.jpg",
+					"value": "b"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1б.jpg",
+					"value": "c"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1г.jpg",
+					"value": "d"
+				}
+			],
+			"answers": [{
+				"text": "проволокой",
+				"image": ""
+			}]
+		},
+		{	
+			"type": "single",
+			"text": "Какой способ стопорения резбовых соединений указан?",
+			"image": "../images/structures/1з.jpg",
+			"options": [
+				{
+					"text": "",
+					"image": "../images/structures/1в.jpg",
+					"value": "a"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1а.jpg",
+					"value": "b"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1б.jpg",
+					"value": "c"
+				},
+				{
+					"text": "",
+					"image": "../images/structures/1г.jpg",
+					"value": "d"
+				}
+			],
+			"answers": [{
+				"text": "проволокой",
+				"image": ""
+			}]
+		}
+	]
+}

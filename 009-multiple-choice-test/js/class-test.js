@@ -114,8 +114,17 @@ class Test {
 		const correctFraction = correctItems / total;
 		const percScore = Math.ceil(correctFraction * 100);
 		document.getElementById("test-score").textContent = percScore;
+		const gradeCSS = this.calcGradeCSSClass(percScore);
+		document.getElementById("test-mark").classList.add(gradeCSS);
 		document.getElementById("test-container").classList.add("hide");
 		document.querySelector(".results-wrapper").classList.add("show");
+	};
+	calcGradeCSSClass(percScore){
+		if(!this.testData.gradeWithCSS) return "ok";
+		if(percScore > 80) return "good";
+		if(percScore > 60) return "ok";
+		if(percScore > 40) return "satifsfactory";
+		return "needs-to-improve";
 	};
 	showReport(){
 		if(!this.hasBeenEvaluated) this.evaluate();
@@ -180,6 +189,8 @@ class Test {
 		if(oldIndex >= 0) this.questions[oldIndex].undisplay();
 		this.currentQuestion = this.questions[newIndex];
 		this.currentQuestion.display();
+		// this.currentQuestion.node.scrollIntoView();
+		this.currentQuestion.node.querySelector(".question-top").scrollIntoView();
 		this.currentQuestion.node.querySelectorAll(".option input").forEach( (el, i, yo) => {
 			el.onchange = function(){this.calcCheckedQuestions();}.bind(this);
 		});

@@ -218,11 +218,12 @@ p.option-text.no-text,
 	text-align: center;
 }
 
-.results .test-mark {
+.results #test-mark {
   font-size: 2rem;
   width: 200px;
   height: 200px;
   margin: 24px auto;
+  border: solid;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -231,11 +232,29 @@ p.option-text.no-text,
   color: azure;
 }
 
-.test-mark.ok {
-  color: azure;
+#test-mark.ok {
   background: #9C27B0;
   border: solid #7B1FA2 2px;
   box-shadow: #8E24AA 0px 0px 10px 0px
+}
+#test-mark.good {  
+  background: #4CAF50;
+  border: solid #388E3C 2px;
+  box-shadow: #66BB6A 0px 0px 10px 0px;
+}
+#test-mark.satifsfactory {
+  /*background: #FFEB3B;
+  border: solid #FDD835 2px;
+  box-shadow: #FFEB3B 0px 0px 10px 0px;*/
+  background: #4FC3F7;
+  border: solid #03A9F4 2px;
+  box-shadow: #81D4FA 0px 0px 10px 0px;  
+}
+#test-mark.needs-to-improve {
+  color: azure;
+  background: red;
+  border: solid red 2px;
+  box-shadow: red 0px 0px 10px 0px
 }
 
 .results .further-options {
