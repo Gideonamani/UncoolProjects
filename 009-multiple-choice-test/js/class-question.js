@@ -142,18 +142,25 @@ class Question {
 		let correctBool = true;
 		const correctlyChecked = [];
 		const incorrectlyChecked = [];
+		// const 
 		for (let i = 0; i < this.checkedOptions.length; i++) {
 			const index = this.checkedOptions[i];	
 			const checkedAns = this.shuffledOptions[index];
-			let correctOption = false;
+			let optionIsCorrect = false;
 			for (let j = 0; j < this.data.answers.length; j++) {
 				const answer = this.data.answers[j];
 				if (checkedAns.text === answer.text) {
-					correctOption = true;
-					correctlyChecked.push(checkedAns);
-				}else{ incorrectlyChecked.push(checkedAns) }
+				// if (checkedAns.value === answer.value) {
+					optionIsCorrect = true;
+					break;
+				}
 			}
-			correctBool = (correctBool && correctOption);
+			if(optionIsCorrect) {
+				correctlyChecked.push(checkedAns);
+			}else{ incorrectlyChecked.push(checkedAns) }
+			// AND all checked options, bacause if any one is wrong then
+			// this question is NOT answered correctly.
+			correctBool = (correctBool && optionIsCorrect);
 		}
 		const answeredCorrectly = (correctBool && sameLength);
 		const evaluation = {
