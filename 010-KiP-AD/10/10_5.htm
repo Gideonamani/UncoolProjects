@@ -1,0 +1,57 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<title>Работа системы запуска двигателя</title>
+	<link href="../../../STYLES/main.css" rel="STYLESHEET" type="text/css" 
+		charset="Windows-1251" hreflang="ru">
+	<script type="text/javascript" language="JavaScript"
+		src="../../SCRIPTS/mi17_0000.js" >
+	</script>	
+<!-- в каждый файл с окнами с текстом из файла Indate.js -->			
+	<script type="text/javascript" language="JavaScript" src="../../SCRIPTS/inDate_tv3.js" ></script>		
+<!-- конец -->						
+	<script type="text/javascript" language="JavaScript" >
+	<!--
+     var ChapterTitle="Работа системы запуска двигателя"; //Сюда название раздела!!!
+	 var strCDr="../../";//Сюда поместить путь до "корневой директории" /MI8
+     var strMW= "";
+	//	-->
+	</script>
+</head>
+<body onload="LoadPageEv(window,strCDr);WriteTitleDoc(window,ChapterTitle);">
+
+<!--****Begin insert Mi-8T guide page*******************************-->
+<p>Запуск двигателя может производиться от аэродромного источника питания или от аккумуляторных батарей вертолета. 
+<table cellspacing="2" cellpadding="2" border="0">
+<tr>
+    <td valign="TOP"><img src="IMG/D10-05in.gif" width=480 height=310 border=0 alt=""></td>
+    <td><p>Для запуска двигателя на щитке запуска необходимо: выбрать запускаемый двигатель, установив переключатель выбора в нужное положение, установить переключатель рода работ в положение "Прокрутка", убедиться в нормальной работе ВСУ АИ-9В. <p>Бортмеханик нажимает кнопку "ЗАПУСК" и  устанавливает рычаг останова двигателя в положение "ОТКР".
+<p><b><i>После нажатия кнопки "ЗАПУСК"</i></b> вступает в работу АПД-78А (загорается табло "АВТОМАТ ВКЛЮЧЕН"), стартер начинает плавную раскрутку ротора турбокомпрессора (загорается табло "СВ РАБОТАЕТ"). 
+<p><b><i>Через 5 с</i></b> вступает в работу система зажигания. <p><b><i>При достижении Nтк=15...20%</i></b> топливо через первый контур форсунок поступает в камеру сгорания (заметен рост температуры газов перед турбиной), а во второй контур поступает воздух через клапан наддува. <p><b><i>Через 30 с</i></b> отключается система зажигания. <p><b><i>При достижении Nтк=60...65%</i></b> по сигналу НР-3ВМ отключается воздушный стартер (табло стартера гаснет), а АПД-78А ускоренно дорабатывает свой цикл и отключается (табло гаснет). 
+<p>Если же ротор турбокомпрессора <b><i>не достигнет Nтк=60...65% за 55 с</i></b>, то стартер отключится панелью запуска АПД-78А. 
+<p>Запуск разрешается производить при снижении Nтк <b>менее 7%</b> (встречный запуск или запуск в полете). 
+</td>
+</tr>
+</table>
+<p>Перед выполнением холодной прокрутки или ложного запуска необходимо переключатель «Запуск-Прокрутка» на щитке запуска двигателей установить в положение «Прокрутка». При этом АПД-78А не подключит в процессе прокрутки в работу систему зажигания. <p>Прокрутка выполняется с  рычагом останова двигателя в положении "ЗАКР", а ложный запуск - в положении "ОТКР".
+<!-- Окно подсказки !!!!!!!!!!!!!!!!      -->
+<div id="uWin0" class="vHlpWin">
+	<div id="uBarTitle" class="vHlpTitleBar">Заголовок</div>
+	<div align="RIGHT" class="vHlpButtonBar">
+		<button id="uBtnOK" class="vHlpButton">r</button></div>
+	<div id="uCont" class="vHlpCont">Содержание!</div>
+</div>
+
+
+<!--****End Mi-8T Guide page****************************************-->
+<hr class="FooterHr">
+<table align="center" width="100%" cellspacing="1" cellpaping="1" border="0">
+<tr>
+    <td width="35px" align="right"><img src=" " border=0 align="miple" alt="Предыдущая" name="lArrow" id="lArrowId" ></td>
+    <td width="35px" align="LEFT"><img src="" border=0 align="miple" alt="Следующая" name="rArrow" id="rArrowId" ></td>
+    <td align="LEFT" valign="MIpLE"><img src="../../../PICTURES/SPARC_logos.GIF" border=0 alt="" align="miple"><font class="CoNameS">Санкт-Петербургская Авиаремонтная Компания</font></td>
+    <td align="right"></td>
+</tr>
+</table>
+</body>
+</html>
